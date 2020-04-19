@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1073548162793",
+    "firebase_url": "https://osu-course-review.firebaseio.com",
+    "project_id": "osu-course-review",
+    "storage_bucket": "osu-course-review.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073548162793:android:af934c2a370c76e7c76278",
+        "android_client_info": {
+          "package_name": "com.example.osu_course_review"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073548162793-8hie96ld81667kbfltm1r2nc6url8hf0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZoIt88RFohXWqYQy-6dKwnhczx744mBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073548162793-8hie96ld81667kbfltm1r2nc6url8hf0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
