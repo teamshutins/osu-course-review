@@ -1,3 +1,5 @@
+// Implementation of App widget, which is the root widget of this entire application.
+
 import 'package:flutter/material.dart';
 import 'screens/course_description.dart';
 
@@ -10,6 +12,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
+      
+      // Taka: Refers to course_description.dart file
       home: CourseDescriptionScreen(title: 'OSU Course Review'),
     );
   }
