@@ -84,7 +84,7 @@ class Description extends StatelessWidget {
                 }
                 // Taka: If there is no item in DB, don't show anything.
                 else {
-                  return null;
+                  return Container();
                 }
               }
             )
