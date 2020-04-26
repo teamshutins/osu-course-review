@@ -1,0 +1,9 @@
+{
+    "_comment": "this is the dummy data for testing purpose",
+
+    "courseNumber": "CS 161",
+    "courseName": "Introduction to Computer Science I",
+    "section": "400",
+    "Description": "Overview of fundamental concepts of computer science. Introduction to problem solving, software engineering, and object-oriented programming. Includes algorithm design and program development.",
+    "instructor": "Tim Alcon"
+}

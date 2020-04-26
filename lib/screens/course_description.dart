@@ -40,40 +40,59 @@ class Description extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Taka: I should have refactored all these Align widgets. They are just repetitive.
+            // SizedBoxes for spacing. We should refactor these ones.
+            SizedBox(height: 20.0,),
+
+            // Taka: I should also refactor all these Align widgets. They are just repetitive.
             Align(
               alignment: Alignment.centerLeft,
               child: Container(                
                 // Taka: For now, I just hard-coded the string. 
-                // This will be later replaced by the string data coming from JSON file.
-                child: Text('CS161 Introduction to Computer Science I', style: TextStyle(color: Colors.black, fontSize: 32)),
+                // This will be later replaced by the string data read from JSON file.
+                child: Text(
+                  'CS 161 Introduction to Computer Science I', 
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 32,)
+                ),
               ),
             ),
+
+            SizedBox(height: 20.0,),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
                 // Taka: We will replace the string later.
-                child: Text('Section: 400', style: TextStyle(color: Colors.black, fontSize: 24)),
+                child: Text('Section: 400 [Use JSON file]', style: TextStyle(color: Colors.black, fontSize: 24)),
               ),
             ),
+
+            SizedBox(height: 20.0,),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
                 // Taka: We will replace the string later.
-                child: Text('Description: blah blah blah', style: TextStyle(color: Colors.black, fontSize: 24)),
+                child: Text('Description: [Replaced by the Course Info read from JSON file]', style: TextStyle(color: Colors.black, fontSize: 24)),
               ),
             ),
+
+            SizedBox(height: 20.0,),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
                 // Taka: We will replace the string later.
-                child: Text('Instructor: Tim Alcon', style: TextStyle(color: Colors.black, fontSize: 24)),
+                child: Text('Instructor: Tim Alcon [Use JSON file]', style: TextStyle(color: Colors.black, fontSize: 24)),
               ),
             ),
+
+            SizedBox(height: 20.0,),
 
             // Taka: When tapping this button, the popup or another screen to write a review will show up.
             WriteReviewButton(),
 
+            SizedBox(height: 20.0,),
+            
             // Taka: This is to retrieve the review data from DB (Google Firebase).
             StreamBuilder(
               stream: Firestore.instance.collection('test_data').snapshots(),
