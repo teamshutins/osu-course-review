@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'screens/course_description.dart';
+import 'screens/course_search.dart';
 
 class App extends StatelessWidget {
   
@@ -12,9 +13,16 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      
-      // Taka: Refers to course_description.dart file
-      home: CourseDescriptionScreen(title: 'OSU Course Review'),
+
+      // set initialRoute to '/course' to load CourseDescriptionScreen      
+      initialRoute: '/',
+      routes: {
+        '/': (context) => CourseSearch(),
+        '/course': (context) => CourseDescriptionScreen(title: 'OSU Course Review'),             
+      }         
     );
   }
 }
+
+
+
