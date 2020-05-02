@@ -5,10 +5,9 @@ import 'package:flutter/services.dart';
 import 'app.dart';
 
 void main() {
-
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Taka: This is for the responsive design. 
+  // Taka: This is for the responsive design.
   // The app should work regarless of the device screen orientation (either portrait or landscape mode).
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
