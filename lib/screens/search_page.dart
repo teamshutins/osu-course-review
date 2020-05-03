@@ -4,8 +4,45 @@
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatelessWidget {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), backgroundColor: Colors.grey);
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: Text('OSU Course Review',
+            style: TextStyle(color: Colors.white, fontSize: 32)),
+      ),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(80.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                  decoration: InputDecoration(hintText: 'Course Name')),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Instructor',
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Term',
+                ),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              RaisedButton(
+                color: Colors.orange,
+                child: Text('ENTER'),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/catalog');
+                },
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
