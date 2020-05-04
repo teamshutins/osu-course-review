@@ -1,6 +1,9 @@
 // Implementation of the "Course Description Screen". This screen displays the description of a specific course.
 // It also shows a list of course reviews. The review data is coming from DB (Google Firebase).
-// source: https://stackoverflow.com/questions/56131101/how-to-place-a-listview-inside-a-singlechildscrollview-but-prevent-them-from-scr
+// source1: https://stackoverflow.com/questions/56131101/how-to-place-a-listview-inside-a-singlechildscrollview-but-prevent-them-from-scr
+// source2: https://bezkoder.com/dart-flutter-parse-json-string-array-to-object-list/
+// source3: https://medium.com/@muddassirm/load-json-data-in-flutter-in-different-ways-e3312e6a317a
+
 
 import 'dart:async';
 import 'dart:convert';
@@ -37,20 +40,27 @@ class CourseDescriptionScreen extends StatelessWidget {
 class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    // Taka: We use FutureBuilder because we will use a future value.
+    // (i.e. courseInfoList() returns the future value.)
     return FutureBuilder<List<CourseInfo>>(
       future: courseInfoList(), 
+
+      // Taka: snapshot represents the list of course info in this case.
       builder: (context, snapshot) {
 
         if (snapshot.hasData) {  
           int courseIndex = 0;
-          String courseId = "CS161";  // do not hard-code
+          String courseId = "CS161";  // do not hard-code. will be replaced later.
           int sectionIndex = 0;
-          int sectionNum = 400;       // do not hard-code
+          int sectionNum = 400;       // do not hard-code. will be replaced later.
 
+          // Taka: Find where in the course info list the course which the user specifies exists.
           while (snapshot.data[courseIndex].id != courseId) {
             courseIndex++;
           }
 
+          // Taka: Find where in the section list the section which the user specifies exists.
           while (snapshot.data[courseIndex].sections[sectionIndex].sectionNumber != sectionNum) {
             sectionIndex++;
           }        
@@ -69,8 +79,7 @@ class Description extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(                
-                      // Taka: For now, I just hard-coded the string. 
-                      // This will be later replaced by the string data read from JSON file.
+                      // Taka: Display the course title and name.
                       child: Text(
                         "${snapshot.data[courseIndex].title} ${snapshot.data[courseIndex].name}",
                       //  'CS 161 Introduction to Computer Science I', 
@@ -84,7 +93,7 @@ class Description extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      // Taka: We will replace the string later.
+                      // Taka: Display the course's section number the user specifies.
                       child: Text(
                         'Section: ${snapshot.data[courseIndex].sections[sectionIndex].sectionNumber}', 
                         style: TextStyle(color: Colors.black, fontSize: 24)
@@ -97,7 +106,7 @@ class Description extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      // Taka: We will replace the string later.
+                      // Taka: Display the course description.
                       child: Text(
                         'Description: ${snapshot.data[courseIndex].description}', 
                         style: TextStyle(color: Colors.black, fontSize: 24)
@@ -110,7 +119,7 @@ class Description extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      // Taka: We will replace the string later.
+                      // Taka: Display the instructor's name of the section the user specifies.
                       child: Text(
                         'Instructor: ${snapshot.data[courseIndex].sections[sectionIndex].instructor.firstName} ${snapshot.data[courseIndex].sections[sectionIndex].instructor.lastName}', 
                         style: TextStyle(color: Colors.black, fontSize: 24)
@@ -150,6 +159,7 @@ class Description extends StatelessWidget {
     );
   }
   
+  //Taka: This function parses the JSON file and returns a list of course information
   Future<List<CourseInfo>> courseInfoList() async {
     String jsonString = await rootBundle.loadString('assets/course_info.json');
     
