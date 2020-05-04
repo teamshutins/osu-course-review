@@ -43,11 +43,11 @@ class Description extends StatelessWidget {
 
         if (snapshot.hasData) {  
           int courseIndex = 0;
-          String courseId = "CS225";  // do not hard-code
+          String courseId = "CS161";  // do not hard-code
           int sectionIndex = 0;
           int sectionNum = 400;       // do not hard-code
 
-          while (snapshot.data[0].id != courseId) {
+          while (snapshot.data[courseIndex].id != courseId) {
             courseIndex++;
           }
 

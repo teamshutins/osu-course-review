@@ -7,22 +7,22 @@
       {
         "sectionNumber": 400,
         "instructor": {
-        "firstName": "Tim",
-        "lastName": "Alcon"
+          "firstName": "Tim",
+          "lastName": "Alcon"
         }
       },
       {
         "sectionNumber": 401,
         "instructor": {
-        "firstName": "Brian",
-        "lastName": "Baker"
+          "firstName": "Brian",
+          "lastName": "Baker"
         }
       },
       {
         "sectionNumber": 402,
         "instructor": {
-        "firstName": "Samarendra",
-        "lastName": "Hedaoo"
+          "firstName": "Samarendra",
+          "lastName": "Hedaoo"
         }
       }
     ],
