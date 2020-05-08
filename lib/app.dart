@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'screens/course_description.dart';
 import 'screens/search_page.dart';
+import 'screens/sections_page.dart';
 
 //App widget points to the different sections of the app
 class App extends StatelessWidget {
@@ -11,10 +12,11 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'OSU Course Review',
       theme: ThemeData(primarySwatch: Colors.orange),
-      initialRoute: '/second',
+      initialRoute: '/sectionsPage',
       routes: {
-        '/': (context) => CourseDescriptionScreen(title: 'OSU Course Review'),
-        '/second': (context) => SearchPage(),
+        '/courseDescription': (context) => CourseDescriptionScreen(title: 'OSU Course Review'),
+        '/searchPage': (context) => SearchPage(),
+        '/sectionsPage': (context) => SectionsPage(),
       },
     );
   }
