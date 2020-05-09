@@ -54,9 +54,7 @@ class CourseSearch extends StatelessWidget {
             
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 5.0),
-            alignment: Alignment.center,
-            child: SearchList()
+            child: ResultsList()
           ),
         ]
       )

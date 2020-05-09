@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'screens/course_description.dart';
 import 'screens/course_search.dart';
 
+
 class App extends StatelessWidget {
   
   @override
@@ -18,7 +19,7 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => CourseSearch(),
-        '/course': (context) => CourseDescriptionScreen(title: 'OSU Course Review'),             
+        '/course': (context) => CourseDescriptionScreen(title: 'OSU Course Review')              
       }         
     );
   }

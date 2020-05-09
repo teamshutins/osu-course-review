@@ -1,32 +1,38 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
 
-class SearchList extends StatefulWidget {
+class ResultsList extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _SearchListState();
+  State<StatefulWidget> createState() => new _ResultsListListState();
 }
 
-class _SearchListState extends State<SearchList> {
+class _ResultsListListState extends State<ResultsList> {   
   @override
   Widget build(BuildContext context) {
-    return Column(       
-      children: [     
-        Container(
-          height: 50,
-          color: Colors.amber[600],
-          child: const Center(child: Text('SOFTWARE ENGINEERING I (CS_361_400_S2020_Lara_Letaw)')),
-        ),
-        Container(
-          height: 50,
-          color: Colors.amber[500],
-          child: const Center(child: Text('SOFTWARE ENGINEERING I (CS_361_401_S20200_Kevin_Lee)')),
-        ),
-        Container(
-          height: 50,
-          color: Colors.amber[100],
-          child: const Center(child: Text('SOFTWARE ENGINEERING I (CS_361_402_S20200_Taka_Watanabe)')),
-        ),
-      ]             
+    // Future<String> loadAsset() async {
+    //   return await rootBundle.loadString('assets/config.json');
+    // }    
+
+    // String courseInfoJSON = loadAsset();
+    // Map<String, dynamic> courseInfo = jsonDecode(courseInfoJSON);    
+
+    final List<String> entries = <String>['A', 'B', 'C'];
+    final List<int> colorCodes = <int>[600, 500, 100];  
+
+    return Expanded(
+      child: ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: entries.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(          
+            height: 50,
+            color: Colors.amber[colorCodes[index]],
+            child: Center(child: Text('Entry ${entries[index]}')),
+          );
+        }
+      )
     );
   }
 }
