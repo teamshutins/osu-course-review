@@ -46,12 +46,17 @@ class CustomDialog extends StatelessWidget {
                         child: Center(
                           child: Container(
                             child: TextFormField(
+                              autofocus: true,
                               autocorrect: true,
-                              maxLength: 960,
-                              maxLines: 12,
+                              maxLength: 200,
+                              maxLines: 8,
                               decoration: InputDecoration(
                                 labelText: "Write Review",
-                                border: InputBorder.none,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black)
+                                ),
+                                fillColor: Colors.white,
+                                filled: true,
                                 ),
                               )
                             )
