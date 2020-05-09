@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../components/reviewentry.dart';
 
 // Taka: Root widget of this screen.
 class CourseDescriptionScreen extends StatelessWidget {
@@ -128,7 +129,7 @@ class WriteReviewButton extends StatelessWidget {
           color: Colors.orange,
           // For now, nothing happens when tapped.
           onPressed: () {
-            
+            showDialog(context: context, builder: (BuildContext context) => CustomDialog());
           },
         ),
       ),

@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       ),
 
       // set initialRoute to '/course' to load CourseDescriptionScreen      
-      initialRoute: '/',
+      initialRoute: '/course',
       routes: {
         '/': (context) => CourseSearch(),
         '/course': (context) => CourseDescriptionScreen(title: 'OSU Course Review'),             
