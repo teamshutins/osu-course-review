@@ -1,32 +1,36 @@
 
+// import offical 
 import 'package:flutter/material.dart';
 
-class SearchList extends StatefulWidget {
+// import custom 
+import './result.dart';
+
+class SearchResults extends StatefulWidget {
+  final List<dynamic> results;  
+
+  SearchResults(this.results);
+
   @override
-  State<StatefulWidget> createState() => new _SearchListState();
+  State<StatefulWidget> createState() => new _SearchResultsState();
 }
 
-class _SearchListState extends State<SearchList> {
+class _SearchResultsState extends State<SearchResults> {    
   @override
   Widget build(BuildContext context) {
-    return Column(       
-      children: [     
-        Container(
-          height: 50,
-          color: Colors.amber[600],
-          child: const Center(child: Text('SOFTWARE ENGINEERING I (CS_361_400_S2020_Lara_Letaw)')),
-        ),
-        Container(
-          height: 50,
-          color: Colors.amber[500],
-          child: const Center(child: Text('SOFTWARE ENGINEERING I (CS_361_401_S20200_Kevin_Lee)')),
-        ),
-        Container(
-          height: 50,
-          color: Colors.amber[100],
-          child: const Center(child: Text('SOFTWARE ENGINEERING I (CS_361_402_S20200_Taka_Watanabe)')),
-        ),
-      ]             
+    void _goToCourse() {
+      Navigator.pushNamed(context, '/course');
+    } 
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: widget.results.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Result(
+            widget.results[index],
+            _goToCourse  
+          );
+        }      
+      )
     );
   }
 }
