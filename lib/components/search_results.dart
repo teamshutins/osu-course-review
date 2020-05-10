@@ -17,8 +17,8 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {    
   @override
   Widget build(BuildContext context) {
-    void _testTap() {
-      print('tap detected');
+    void _goToCourse() {
+      Navigator.pushNamed(context, '/course');
     } 
 
     return Expanded(
@@ -27,7 +27,7 @@ class _SearchResultsState extends State<SearchResults> {
         itemBuilder: (BuildContext context, int index) {
           return Result(
             widget.results[index],
-            _testTap  
+            _goToCourse  
           );
         }      
       )

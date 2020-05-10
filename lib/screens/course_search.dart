@@ -47,11 +47,21 @@ class CourseSearchState extends State<CourseSearch> {
     });
   }
 
-  void handleSearch() {
+  void handleSearch() {    
     setState(() {
-      _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();
+      if (_titleQuery == '' && _instructorQuery == '') {    // set _results to empty list if search input fields are empty
+        _results = [];
+      }
+      else if (_titleQuery != '' && _instructorQuery != '') {     // search by title AND instructor
+        // #TODO
+      }
+      else if (_titleQuery != '' && _instructorQuery == '') {     // search by title
+        _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();          
+      }
+      else if (_titleQuery == '' && _instructorQuery != '') {     // search by instructor
+        // #TODO
+      }      
     });
-    print(_results);
   }
   
   @override
@@ -71,7 +81,7 @@ class CourseSearchState extends State<CourseSearch> {
                     onChanged: handleTitleQuery,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Course title',
+                      hintText: 'Course title (ex: 161, CS162)',
                     ),                  
                   ),
                 ),
