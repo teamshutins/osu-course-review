@@ -13,17 +13,17 @@ class SearchResults extends StatefulWidget {
 }
 
 class _SearchResultsState extends State<SearchResults> {   
-  List<dynamic> _catalog;
+  List<dynamic> _courseCatalog = [];
   var _results = [];
-
+  
   void loadCourses() async {
-    _catalog = jsonDecode(await rootBundle.loadString('assets/course_info.json'));
-    print(_catalog);
-  }
+    _courseCatalog = jsonDecode(await rootBundle.loadString('assets/course_info.json'));
 
-  // Future<String> loadCourses() async {
-  //   return await rootBundle.loadString('assets/course_info.json');
-  // }
+    // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog 
+    setState(() {
+      _courseCatalog = _courseCatalog;
+    });    
+  }
 
   @override
   void initState() {
@@ -39,12 +39,6 @@ class _SearchResultsState extends State<SearchResults> {
 
   @override
   Widget build(BuildContext context) {
-    // Future<String> loadAsset() async {
-    //   return await rootBundle.loadString('assets/config.json');
-    // }    
-
-    // String courseInfoJSON = loadAsset();
-    // Map<String, dynamic> courseInfo = jsonDecode(courseInfoJSON);   
     void _testTap() {
       print('tap detected');
     } 
@@ -55,13 +49,12 @@ class _SearchResultsState extends State<SearchResults> {
     return Expanded(
       child: ListView.builder(
         // padding: const EdgeInsets.all(8),
-        itemCount: entries.length,
+        itemCount: _courseCatalog.length,
         itemBuilder: (BuildContext context, int index) {
           return Result(
-            entries[index],
-            colorCodes[index],
+            _courseCatalog[index],
             _testTap  
-          );         
+          );
         }      
       )
     );

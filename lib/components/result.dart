@@ -7,11 +7,10 @@ class Result extends StatelessWidget {
   // String instructor;  
 
   // Result(this.title, this.name, this.section, this.instructor);
-  final String title;
-  final int color;
+  final course;
   final Function _testTap;
 
-  Result(this.title, this.color, this._testTap);
+  Result(this.course, this._testTap);
 
   @override 
   Widget build(BuildContext context) {
@@ -19,9 +18,8 @@ class Result extends StatelessWidget {
             onTap: _testTap,
             child: Container(
               padding: const EdgeInsets.all(6),        
-              color: Colors.amber[color],
               child: Text(
-                'Test $title',
+                '${course['title']}',
                 style: TextStyle(fontSize: 20)
               ),
             ),
