@@ -1,43 +1,20 @@
 
 // import offical 
 import 'package:flutter/material.dart';
-import 'dart:async' show Future;
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 
 // import custom 
 import './result.dart';
 
 class SearchResults extends StatefulWidget {
+  final List<dynamic> results;  
+
+  SearchResults(this.results);
+
   @override
   State<StatefulWidget> createState() => new _SearchResultsState();
 }
 
-class _SearchResultsState extends State<SearchResults> {   
-  List<dynamic> _courseCatalog = [];
-  var _results = [];
-  
-  void loadCourses() async {
-    _courseCatalog = jsonDecode(await rootBundle.loadString('assets/course_info.json'));
-
-    // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog 
-    setState(() {
-      _courseCatalog = _courseCatalog;
-    });    
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadCourses(); 
-  }
-
-  void _findCourse() {
-    setState(() {
-      _results = [1, 2, 3];
-    });
-  }
-
+class _SearchResultsState extends State<SearchResults> {    
   @override
   Widget build(BuildContext context) {
     void _testTap() {
@@ -46,10 +23,10 @@ class _SearchResultsState extends State<SearchResults> {
 
     return Expanded(
       child: ListView.builder(
-        itemCount: _courseCatalog.length,
+        itemCount: widget.results.length,
         itemBuilder: (BuildContext context, int index) {
           return Result(
-            _courseCatalog[index],
+            widget.results[index],
             _testTap  
           );
         }      

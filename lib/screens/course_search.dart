@@ -1,4 +1,10 @@
+// import official
 import 'package:flutter/material.dart';
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
+
+// import custom
 import '../components/search_results.dart';
 
 class CourseSearch extends StatefulWidget {
@@ -9,8 +15,29 @@ class CourseSearch extends StatefulWidget {
 }
 
 class CourseSearchState extends State<CourseSearch> {
-  String titleQuery;
-  String instructorQuery;
+  String _titleQuery;
+  String _instructorQuery;
+  List<dynamic> _courseCatalog = [];
+  var _results = [];
+
+  void loadCourses() async {
+    _courseCatalog = jsonDecode(await rootBundle.loadString('assets/course_info.json'));
+
+    // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog 
+    setState(() {
+      _courseCatalog = _courseCatalog;
+    });    
+  } 
+
+  @override
+  void initState() {
+    super.initState();
+    loadCourses(); 
+  }
+
+  void handleCourseSearch() {
+    print('handling course search');
+  }
 
   @override
   Widget build(BuildContext context) {   
@@ -44,9 +71,7 @@ class CourseSearchState extends State<CourseSearch> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: RaisedButton(
-                    onPressed: () {
-                      // list search results below
-                    },
+                    onPressed: handleCourseSearch,
                     child: Text('Find course'),
                   ),
                 ),
@@ -55,7 +80,7 @@ class CourseSearchState extends State<CourseSearch> {
             
           ),
           Container(
-            child: SearchResults()
+            child: SearchResults(_results)
           ),
         ]
       )
