@@ -20,7 +20,9 @@ class CourseDescriptionScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white, size: 36.0,),          
           // Taka: Currently, nothing happens when tapping the back arrow.
           // (It should go back to the previous screen.)
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
         ),
         centerTitle: true, 
         title: Text(title, style: TextStyle(color: Colors.white, fontSize: 32)),
