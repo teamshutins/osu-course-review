@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/results.dart';
+import '../components/search_results.dart';
 
 class CourseSearch extends StatelessWidget {
   @override
@@ -41,7 +41,7 @@ class CourseSearch extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: RaisedButton(
                     onPressed: () {
                       // list search results below
@@ -54,7 +54,7 @@ class CourseSearch extends StatelessWidget {
             
           ),
           Container(
-            child: ResultsList()
+            child: SearchResults()
           ),
         ]
       )

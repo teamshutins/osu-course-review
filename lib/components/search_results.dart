@@ -1,14 +1,42 @@
 
 import 'package:flutter/material.dart';
+import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
-class ResultsList extends StatefulWidget {
+
+import './result.dart';
+
+class SearchResults extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _ResultsListListState();
+  State<StatefulWidget> createState() => new _SearchResultsState();
 }
 
-class _ResultsListListState extends State<ResultsList> {   
+class _SearchResultsState extends State<SearchResults> {   
+  List<dynamic> _catalog;
+  var _results = [];
+
+  void loadCourses() async {
+    _catalog = jsonDecode(await rootBundle.loadString('assets/course_info.json'));
+    print(_catalog);
+  }
+
+  // Future<String> loadCourses() async {
+  //   return await rootBundle.loadString('assets/course_info.json');
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    loadCourses(); 
+  }
+
+  void _findCourse() {
+    setState(() {
+      _results = [1, 2, 3];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Future<String> loadAsset() async {
@@ -16,22 +44,25 @@ class _ResultsListListState extends State<ResultsList> {
     // }    
 
     // String courseInfoJSON = loadAsset();
-    // Map<String, dynamic> courseInfo = jsonDecode(courseInfoJSON);    
+    // Map<String, dynamic> courseInfo = jsonDecode(courseInfoJSON);   
+    void _testTap() {
+      print('tap detected');
+    } 
 
-    final List<String> entries = <String>['A', 'B', 'C'];
+    final List<String> entries = <String>['A', 'Y', 'C'];
     final List<int> colorCodes = <int>[600, 500, 100];  
 
     return Expanded(
       child: ListView.builder(
-        padding: const EdgeInsets.all(8),
+        // padding: const EdgeInsets.all(8),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(          
-            height: 50,
-            color: Colors.amber[colorCodes[index]],
-            child: Center(child: Text('Entry ${entries[index]}')),
-          );
-        }
+          return Result(
+            entries[index],
+            colorCodes[index],
+            _testTap  
+          );         
+        }      
       )
     );
   }
