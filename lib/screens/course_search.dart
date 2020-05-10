@@ -15,8 +15,8 @@ class CourseSearch extends StatefulWidget {
 }
 
 class CourseSearchState extends State<CourseSearch> {
-  String _titleQuery;
-  String _instructorQuery;
+  String _titleQuery = '';
+  String _instructorQuery = '';
   List<dynamic> _courseCatalog = [];
   var _results = [];
 
@@ -35,10 +35,22 @@ class CourseSearchState extends State<CourseSearch> {
     loadCourses(); 
   }
 
-  void handleCourseSearch() {
-    print('handling course search');
+  void handleTitleQuery(value) {
+    setState(() {
+      _titleQuery = value;
+    });
   }
 
+  void handleInstructorQuery(value) {
+    setState(() {
+      _instructorQuery = value;
+    });
+  }
+
+  void handleSearch() {
+    print('handling course search');
+  }
+  
   @override
   Widget build(BuildContext context) {   
     return Scaffold(
@@ -53,6 +65,7 @@ class CourseSearchState extends State<CourseSearch> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                   child: TextField(
+                    onChanged: handleTitleQuery,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Course title',
@@ -62,6 +75,7 @@ class CourseSearchState extends State<CourseSearch> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                   child: TextField(
+                    onChanged: handleInstructorQuery,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Instructor',
@@ -71,7 +85,7 @@ class CourseSearchState extends State<CourseSearch> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: RaisedButton(
-                    onPressed: handleCourseSearch,
+                    onPressed: handleSearch,
                     child: Text('Find course'),
                   ),
                 ),
