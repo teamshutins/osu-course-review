@@ -1,10 +1,11 @@
 
+// import offical 
 import 'package:flutter/material.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
-
+// import custom 
 import './result.dart';
 
 class SearchResults extends StatefulWidget {
@@ -43,12 +44,8 @@ class _SearchResultsState extends State<SearchResults> {
       print('tap detected');
     } 
 
-    final List<String> entries = <String>['A', 'Y', 'C'];
-    final List<int> colorCodes = <int>[600, 500, 100];  
-
     return Expanded(
       child: ListView.builder(
-        // padding: const EdgeInsets.all(8),
         itemCount: _courseCatalog.length,
         itemBuilder: (BuildContext context, int index) {
           return Result(

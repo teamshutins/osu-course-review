@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import '../components/search_results.dart';
 
-class CourseSearch extends StatelessWidget {
+class CourseSearch extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return CourseSearchState();
+  }
+}
+
+class CourseSearchState extends State<CourseSearch> {
+  String titleQuery;
+  String instructorQuery;
+
   @override
   Widget build(BuildContext context) {   
     return Scaffold(
@@ -28,15 +38,6 @@ class CourseSearch extends StatelessWidget {
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Instructor',
-                    ),                  
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Term',
                     ),                  
                   ),
                 ),
