@@ -48,7 +48,10 @@ class CourseSearchState extends State<CourseSearch> {
   }
 
   void handleSearch() {
-    print('handling course search');
+    setState(() {
+      _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();
+    });
+    print(_results);
   }
   
   @override
