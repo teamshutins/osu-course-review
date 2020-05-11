@@ -142,7 +142,7 @@ class CustomDialog extends StatelessWidget {
                                   child: TextFormField(
                                     autocorrect: true,
                                     autofocus: true,
-                                    maxLength: 25,
+                                    maxLength: 30,
                                     maxLines: 1,
                                     textAlign: TextAlign.center,
                                       decoration: InputDecoration(
