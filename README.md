@@ -1,5 +1,5 @@
-# osu-course-review (Sprint 1 Pair Programming by Pair 2)
-This version implements the "Course Description Screen" and also added the Google Firebase for DB.
+# osu-course-review (Sprint 2 Pair 2 - Taka's part)
+This version implements the updated "Course Description Screen" which reads the data from the JSON file.
 
 ############ NOTE ################
 

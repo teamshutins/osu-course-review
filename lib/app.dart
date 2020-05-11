@@ -15,7 +15,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
 
-      // set initialRoute to '/course' to load CourseDescriptionScreen      
+      // set initialRoute to '/' to load the main serach Screen      
       initialRoute: '/',
       routes: {
         '/': (context) => CourseSearch(),

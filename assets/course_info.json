@@ -7,22 +7,22 @@
       {
         "sectionNumber": 400,
         "instructor": {
-        "firstName": "Tim",
-        "lastName": "Alcon"
+          "firstName": "Tim",
+          "lastName": "Alcon"
         }
       },
       {
         "sectionNumber": 401,
         "instructor": {
-        "firstName": "Brian",
-        "lastName": "Baker"
+          "firstName": "Brian",
+          "lastName": "Baker"
         }
       },
       {
         "sectionNumber": 402,
         "instructor": {
-        "firstName": "Samarendra",
-        "lastName": "Hedaoo"
+          "firstName": "Samarendra",
+          "lastName": "Hedaoo"
         }
       }
     ],
@@ -52,7 +52,7 @@
   },
   {
     "id": "CS225",
-    "title": "CS 225",
+    "title": "CS225",
     "name": "Discrete Structures in Computer Science ",
     "sections": [
       {
@@ -63,6 +63,6 @@
         }
       }
     ],
-    "description": " An introduction to the discrete mathematics of computer science, including logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory. (Note: Students may take either MTH 231 or CS 225, but cannot receive credit for both.)"
+    "description": "An introduction to the discrete mathematics of computer science, including logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory. (Note: Students may take either MTH 231 or CS 225, but cannot receive credit for both.)"
   }
 ]  
