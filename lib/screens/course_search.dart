@@ -113,7 +113,7 @@ class CourseSearchState extends State<CourseSearch> {
             
           ),
           Container(
-            child: _results.length!=0? Text("${_results[0]["title"]} ${_results[0]["name"]}"): null,
+            child: _results.length!=0? Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)): null,
           ),
           Container(
             child: _results.length!=0? SearchResults(_results): null,
