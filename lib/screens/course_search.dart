@@ -98,7 +98,13 @@ class CourseSearchState extends State<CourseSearch> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: RaisedButton(
-                    onPressed: handleSearch,
+                    onPressed: () {
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                      handleSearch();
+                    },
                     child: Text('Find course'),
                   ),
                 ),
@@ -107,7 +113,10 @@ class CourseSearchState extends State<CourseSearch> {
             
           ),
           Container(
-            child: SearchResults(_results)
+            child: _results.length!=0? Text("${_results[0]["title"]} ${_results[0]["name"]}"): null,
+          ),
+          Container(
+            child: _results.length!=0? SearchResults(_results): null,
           ),
         ]
       )

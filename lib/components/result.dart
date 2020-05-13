@@ -8,6 +8,7 @@ class Result extends StatelessWidget {
 
   @override 
   Widget build(BuildContext context) {
+//    print(course);
     return InkWell(
       onTap: _goToCourse,
       child: Container(
@@ -20,7 +21,7 @@ class Result extends StatelessWidget {
           ),
         ),
         child: Text(
-          '${course['title']} ${course['name']}',
+          'Section ${course['sectionNumber']} ${course['instructor']['firstName']} ${course['instructor']['lastName']}',
           style: TextStyle(fontSize: 20)
         ),
       ),

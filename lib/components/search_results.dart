@@ -20,13 +20,13 @@ class _SearchResultsState extends State<SearchResults> {
     void _goToCourse() {
       Navigator.pushNamed(context, '/course');
     } 
-
+//print(widget.results[0]["sections"][0]);
     return Expanded(
       child: ListView.builder(
-        itemCount: widget.results.length,
+        itemCount: widget.results[0]["sections"].length,
         itemBuilder: (BuildContext context, int index) {
           return Result(
-            widget.results[index],
+            widget.results[0]["sections"][index],
             _goToCourse  
           );
         }      
