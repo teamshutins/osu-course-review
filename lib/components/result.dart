@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import '../models/id_section.dart';
 
 class Result extends StatelessWidget {
   final course;
@@ -8,7 +9,6 @@ class Result extends StatelessWidget {
 
   @override 
   Widget build(BuildContext context) {
-//    print(course);
     return InkWell(
       onTap: _goToCourse,
       child: Container(

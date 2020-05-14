@@ -1,3 +1,5 @@
+// Source: https://flutterigniter.com/dismiss-keyboard-form-lose-focus/
+
 // import official
 import 'package:flutter/material.dart';
 import 'dart:async' show Future;
@@ -8,6 +10,10 @@ import 'dart:convert';
 import '../components/search_results.dart';
 
 class CourseSearch extends StatefulWidget {
+  
+  final List prevResults;
+  CourseSearch({Key key, this.prevResults}): super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return CourseSearchState();
@@ -49,7 +55,7 @@ class CourseSearchState extends State<CourseSearch> {
 
   void handleSearch() {    
     setState(() {
-      if (_titleQuery == '' && _instructorQuery == '') {    // set _results to empty list if search input fields are empty
+      if (_titleQuery == '' && _instructorQuery == '') {    // set results to empty list if search input fields are empty
         _results = [];
       }
       else if (_titleQuery != '' && _instructorQuery != '') {     // search by title AND instructor
@@ -113,10 +119,16 @@ class CourseSearchState extends State<CourseSearch> {
             
           ),
           Container(
-            child: _results.length!=0? Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)): null,
+            child: _results.length!=0 ? 
+                  Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
+                  (
+                    widget.prevResults.length!=0 ? 
+                    Text("${widget.prevResults[0]["title"]} ${widget.prevResults[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
+                    null
+                  ),
           ),
           Container(
-            child: _results.length!=0? SearchResults(_results): null,
+            child: _results.length!=0 ? SearchResults(_results) : (widget.prevResults.length!=0 ? SearchResults(widget.prevResults) : null),
           ),
         ]
       )

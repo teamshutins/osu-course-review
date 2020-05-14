@@ -10,14 +10,16 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'course_search.dart';
+import '../models/id_section.dart';
 import '../models/course_info.dart';
 import '../components/reviewentry.dart';
 
 // Taka: Root widget of this screen.
 class CourseDescriptionScreen extends StatelessWidget {
   
-  final String title;
-  CourseDescriptionScreen({Key key, this.title}) : super(key: key);
+  final IdAndSection idAndSection;
+  CourseDescriptionScreen({Key key, this.idAndSection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +29,28 @@ class CourseDescriptionScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white, size: 36.0,),          
           // Taka: Go back to the main screen.
           onPressed: () {  
-            Navigator.pushNamed(context, '/');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CourseSearch(prevResults: idAndSection.results)),
+            );
           },
         ),
         centerTitle: true, 
-        title: Text(title, style: TextStyle(color: Colors.white, fontSize: 32)),
+        title: Text('OSU Course Review', style: TextStyle(color: Colors.white, fontSize: 32)),
       ),
-      body: Description(),
+      body: Description(idAndSection: idAndSection),
     );
   }
 }
 
 // Taka: This widget is to display the course description + a list of course reviews.
 class Description extends StatelessWidget {
+
+  final IdAndSection idAndSection;
+  Description({Key key, this.idAndSection}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-
     // Taka: We use FutureBuilder because we will use a future value.
     // (i.e. courseInfoList() returns the future value.)
     return FutureBuilder<List<CourseInfo>>(
@@ -53,9 +61,9 @@ class Description extends StatelessWidget {
 
         if (snapshot.hasData) {  
           int courseIndex = 0;
-          String courseId = "CS161";  // do not hard-code. will be replaced later.
+          String courseId = idAndSection.courseId;  //ex. "CS161"
           int sectionIndex = 0;
-          int sectionNum = 400;       // do not hard-code. will be replaced later.
+          int sectionNum = idAndSection.sectionNumber;  //ex. 400
 
           // Taka: Find where in the course info list the course which the user specifies exists.
           while (snapshot.data[courseIndex].id != courseId) {
@@ -225,5 +233,3 @@ class ReviewList extends StatelessWidget {
     );
   }
 }
-
-    
