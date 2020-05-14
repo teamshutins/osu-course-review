@@ -140,13 +140,14 @@ class Description extends StatelessWidget {
                   SizedBox(height: 20.0,),
 
                   // Taka: When tapping this button, the popup or another screen to write a review will show up.
-                  WriteReviewButton(),
+                  WriteReviewButton(courseId: idAndSection.courseId),
 
                   SizedBox(height: 20.0,),
                   
                   // Taka: This is to retrieve the review data from DB (Google Firebase).
                   StreamBuilder(
-                    stream: Firestore.instance.collection('test_data').where("id", isEqualTo: "CS161").snapshots(),
+                    // Taka: We should start a new collection in Firebase Database and replace the collection name here.
+                    stream: Firestore.instance.collection('test_data').where("id", isEqualTo: idAndSection.courseId).snapshots(),
                     builder: (context, snapshot) {
                       // Taka: If there is at least one item in DB, build and show the list of reviews.
                       if (snapshot.hasData && snapshot.data.documents != null && snapshot.data.documents.length > 0) {   
@@ -185,6 +186,10 @@ class Description extends StatelessWidget {
 
 // Taka: This widget implements the button to display a popup/screen to write a review.
 class WriteReviewButton extends StatelessWidget {
+  
+  final String courseId;
+  WriteReviewButton({Key key, this.courseId}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -194,9 +199,10 @@ class WriteReviewButton extends StatelessWidget {
         child: RaisedButton(
           child: Text('WRITE REVIEW', style: TextStyle(color: Colors.white, fontSize: 24)),
           color: Colors.orange,
-          // For now, nothing happens when tapped.
+          // Taka: Show the review entry form popup.
           onPressed: () {
-            showDialog(context: context, builder: (BuildContext context) => CustomDialog());
+            // Taka: Passing the courseId because the form needs to uplodad the info to DB.
+            showDialog(context: context, builder: (BuildContext context) => CustomDialog(courseId: courseId));
           },
         ),
       ),
