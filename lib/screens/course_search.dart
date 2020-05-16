@@ -75,26 +75,8 @@ class CourseSearchState extends State<CourseSearch> {
             alignment: Alignment.center,            
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: TextField(
-                    onChanged: handleTitleQuery,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Course title (ex: 161, CS162)',
-                    ),                  
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: TextField(
-                    onChanged: handleInstructorQuery,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Instructor',
-                    ),                  
-                  ),
-                ),
+                seachFieldPadding('Course title (ex: 161, CS162)'),
+                seachFieldPadding('Instructor'),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: RaisedButton(
@@ -111,6 +93,19 @@ class CourseSearchState extends State<CourseSearch> {
           ),
         ]
       )
+    );
+  }
+
+  Widget seachFieldPadding(String hintText) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      child: TextField(
+        onChanged: handleTitleQuery,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: hintText,
+        ),
+      ),
     );
   }
 }

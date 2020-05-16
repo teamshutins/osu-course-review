@@ -67,6 +67,11 @@ class Description extends StatelessWidget {
             sectionIndex++;
           }        
 
+          String courseTitle = '${snapshot.data[courseIndex].title} ${snapshot.data[courseIndex].name}';
+          String courseSection = 'Section: ${snapshot.data[courseIndex].sections[sectionIndex].sectionNumber}';
+          String courseDescription = 'Description: ${snapshot.data[courseIndex].description}';
+          String instructorName = 'Instructor: ${snapshot.data[courseIndex].sections[sectionIndex].instructor.firstName} ${snapshot.data[courseIndex].sections[sectionIndex].instructor.lastName}';
+          
           return SafeArea(
             // Taka: SingleChildScrollView makes the entire screen scrollable.
             child: SingleChildScrollView(
@@ -74,61 +79,22 @@ class Description extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // SizedBoxes for spacing. We should refactor these ones.
                   SizedBox(height: 20.0,),
 
-                  // Taka: I should also refactor all these Align widgets. They are just repetitive.
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(                
-                      // Taka: Display the course title and name.
-                      child: Text(
-                        "${snapshot.data[courseIndex].title} ${snapshot.data[courseIndex].name}",
-                      //  'CS 161 Introduction to Computer Science I', 
-                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 32,)
-                      ),
-                    ),
-                  ),
+                  courseInfoTextsAlign(courseTitle, true, 32),
 
                   SizedBox(height: 20.0,),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      // Taka: Display the course's section number the user specifies.
-                      child: Text(
-                        'Section: ${snapshot.data[courseIndex].sections[sectionIndex].sectionNumber}', 
-                        style: TextStyle(color: Colors.black, fontSize: 24)
-                      ),
-                    ),
-                  ),
+                  courseInfoTextsAlign(courseSection, false, 24),
 
                   SizedBox(height: 20.0,),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      // Taka: Display the course description.
-                      child: Text(
-                        'Description: ${snapshot.data[courseIndex].description}', 
-                        style: TextStyle(color: Colors.black, fontSize: 24)
-                      ),
-                    ),
-                  ),
-
+                  courseInfoTextsAlign(courseDescription, false, 24),
+                  
                   SizedBox(height: 20.0,),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      // Taka: Display the instructor's name of the section the user specifies.
-                      child: Text(
-                        'Instructor: ${snapshot.data[courseIndex].sections[sectionIndex].instructor.firstName} ${snapshot.data[courseIndex].sections[sectionIndex].instructor.lastName}', 
-                        style: TextStyle(color: Colors.black, fontSize: 24)
-                      ),
-                    ),
-                  ),
-
+                  courseInfoTextsAlign(instructorName, false, 24),
+                  
                   SizedBox(height: 20.0,),
 
                   // Taka: When tapping this button, the popup or another screen to write a review will show up.
@@ -158,6 +124,18 @@ class Description extends StatelessWidget {
           return Container();
         }
       }
+    );
+  }
+
+  Widget courseInfoTextsAlign(String courseInfoText, bool isCourseTitle, double fontSize) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(                
+        child: Text(
+          courseInfoText,
+          style: TextStyle(color: Colors.black, fontWeight: isCourseTitle ? FontWeight.bold : null, fontSize: fontSize,)
+        ),
+      ),
     );
   }
   
@@ -212,18 +190,20 @@ class ReviewList extends StatelessWidget {
         itemCount: snapshot.data.documents.length,
         itemBuilder: (context, index) {
           var post = snapshot.data.documents[index];
-          return ListTile(
-            title: Text(
-              post['comment']
-            ),
-            subtitle: Text(
-              post['name']
-            ),
-          );
+          return showReviewListTile(post);
         },
       ),
     );
   }
-}
 
-    
+  Widget showReviewListTile(post) {
+    return ListTile(
+      title: Text(
+        post['comment']
+      ),
+      subtitle: Text(
+        post['name']
+      ),
+    );
+  }
+}
