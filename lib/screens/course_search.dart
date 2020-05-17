@@ -24,15 +24,15 @@ class CourseSearchState extends State<CourseSearch> {
   String _titleQuery = '';
   String _instructorQuery = '';
   List<dynamic> _courseCatalog = [];
-  var _results = [];
+  List<dynamic> _results = [];
 
   void loadCourses() async {
-    var courseData = jsonDecode(await rootBundle.loadString('assets/course_info.json'));   
-    var courseDataBySection = [];    
+    List<dynamic> courseData = jsonDecode(await rootBundle.loadString('assets/course_info.json'));   
+    List<dynamic> courseDataBySection = [];    
 
-    for (Map course in courseData) {
-      for (Map section in course['sections']) {
-        Map tempCourse = {...course};
+    for (Map<String, dynamic> course in courseData) {
+      for (Map<String, dynamic> section in course['sections']) {
+        Map<String, dynamic> tempCourse = {...course};
         tempCourse['section'] = section['sectionNumber'];
         tempCourse['instructor'] = section['instructor'];
         tempCourse['instructor']['fullName'] = '${section['instructor']['firstName']} ${section['instructor']['lastName']}';
@@ -73,13 +73,19 @@ class CourseSearchState extends State<CourseSearch> {
         _results = [];
       }
       else if (_titleQuery != '' && _instructorQuery != '') {     // search by title AND instructor
-        // #TODO
+        _results = _courseCatalog.where((course) {
+          bool instructorMatch = course['instructor']['fullName'].toLowerCase().contains(_instructorQuery.toLowerCase());
+          bool titleMatch = course['title'].toLowerCase().contains(_titleQuery.toLowerCase());
+          return instructorMatch && titleMatch;
+        }).toList();
       }
       else if (_titleQuery != '' && _instructorQuery == '') {     // search by title
-        _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();          
+        _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();        
+        print(_results);  
       }
       else if (_titleQuery == '' && _instructorQuery != '') {     // search by instructor
         // #TODO
+        _results = _courseCatalog.where((course) => course['instructor']['fullName'].toLowerCase().contains(_instructorQuery.toLowerCase())).toList();        
       }      
     });
   }
@@ -133,17 +139,25 @@ class CourseSearchState extends State<CourseSearch> {
             
           ),
           Container(
-            child: _results.length != 0 ? 
-                  Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
-                  (
-                    widget.prevResults.length !=0 ? 
-                    Text("${widget.prevResults[0]["title"]} ${widget.prevResults[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
-                    null
-                  ),
+            child: SearchResults(_results),
           ),
-          Container(
-            child: _results.length !=0 ? SearchResults(_results) : (widget.prevResults.length !=0 ? SearchResults(widget.prevResults) : null),
-          ),
+          // Container(
+          //   child: Text(              
+          //     _results.length > 0 ? _results[0]['title'] : 'NULL'
+          //   ),
+          // ),
+          // Container(
+          //   child: _results.length != 0 ? 
+          //         Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
+          //         (
+          //           widget.prevResults.length !=0 ? 
+          //           Text("${widget.prevResults[0]["title"]} ${widget.prevResults[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
+          //           null
+          //         ),
+          // ),
+          // Container(
+          //   child: _results.length != 0 ? SearchResults(_results) : (widget.prevResults.length != 0 ? SearchResults(widget.prevResults) : null),
+          // ),
         ]
       )
     );

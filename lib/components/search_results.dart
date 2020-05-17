@@ -19,24 +19,30 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {    
   @override
   Widget build(BuildContext context) {
+    void _goToCourse() {
+      // Navigator.pushNamed(context, '/course');
+      print('go to course tapped');
+    } 
+
     return Expanded(
       child: ListView.builder(
-        itemCount: widget.results[0]["sections"].length,
+        itemCount: widget.results.length,
         itemBuilder: (BuildContext context, int index) {
           return Result(
-            widget.results[0]["sections"][index],
+            widget.results[index],
+            _goToCourse
             //Taka: passing an anonymous function instead of the pre-defined _goToCourse
-            () {
-              final IdAndSection idAndSecNum = IdAndSection(
-                    courseId: widget.results[0]["id"], 
-                    sectionNumber: widget.results[0]["sections"][index]["sectionNumber"],
-                    results: widget.results
-                  );
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CourseDescriptionScreen(idAndSection: idAndSecNum)),
-              );
-            }  
+            // () {
+            //   final IdAndSection idAndSecNum = IdAndSection(
+            //         courseId: widget.results[0]["id"], 
+            //         sectionNumber: widget.results[0]["sections"][index]["sectionNumber"],
+            //         results: widget.results
+            //       );
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => CourseDescriptionScreen(idAndSection: idAndSecNum)),
+            //   );
+              
           );
         }      
       )
