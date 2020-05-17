@@ -12,7 +12,7 @@ import '../components/search_results.dart';
 class CourseSearch extends StatefulWidget {
   
   final List prevResults;
-  CourseSearch({Key key, this.prevResults}): super(key: key);
+  CourseSearch({this.prevResults});
 
   @override
   State<StatefulWidget> createState() {
@@ -27,11 +27,25 @@ class CourseSearchState extends State<CourseSearch> {
   var _results = [];
 
   void loadCourses() async {
-    _courseCatalog = jsonDecode(await rootBundle.loadString('assets/course_info.json'));
+    var courseData = jsonDecode(await rootBundle.loadString('assets/course_info.json'));   
+    var courseDataBySection = [];    
+
+    for (Map course in courseData) {
+      for (Map section in course['sections']) {
+        Map tempCourse = {...course};
+        tempCourse['section'] = section['sectionNumber'];
+        tempCourse['instructor'] = section['instructor'];
+        tempCourse['instructor']['fullName'] = '${section['instructor']['firstName']} ${section['instructor']['lastName']}';
+        tempCourse['id'] = '${course['id']}_${section['sectionNumber']}';
+        tempCourse.remove('sections');
+        courseDataBySection.add(tempCourse);
+      }
+    }
 
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog 
     setState(() {
-      _courseCatalog = _courseCatalog;
+      _courseCatalog = courseDataBySection;
+      print(_courseCatalog);
     });    
   } 
 
@@ -119,16 +133,16 @@ class CourseSearchState extends State<CourseSearch> {
             
           ),
           Container(
-            child: _results.length!=0 ? 
+            child: _results.length != 0 ? 
                   Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
                   (
-                    widget.prevResults.length!=0 ? 
+                    widget.prevResults.length !=0 ? 
                     Text("${widget.prevResults[0]["title"]} ${widget.prevResults[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
                     null
                   ),
           ),
           Container(
-            child: _results.length!=0 ? SearchResults(_results) : (widget.prevResults.length!=0 ? SearchResults(widget.prevResults) : null),
+            child: _results.length !=0 ? SearchResults(_results) : (widget.prevResults.length !=0 ? SearchResults(widget.prevResults) : null),
           ),
         ]
       )
