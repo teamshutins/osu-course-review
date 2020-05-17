@@ -60,20 +60,22 @@ class Description extends StatelessWidget {
       builder: (context, snapshot) {
 
         if (snapshot.hasData) {  
-          int courseIndex = 0;
-          String courseId = idAndSection.courseId;  //ex. "CS161"
-          int sectionIndex = 0;
-          int sectionNum = idAndSection.sectionNumber;  //ex. 400
+          print('=============');
+          print(snapshot.data);
+          // int courseIndex = 0;
+          // String courseId = idAndSection.courseId;  //ex. "CS161"
+          // int sectionIndex = 0;
+          // int sectionNum = idAndSection.sectionNumber;  //ex. 400
 
-          // Taka: Find where in the course info list the course which the user specifies exists.
-          while (snapshot.data[courseIndex].id != courseId) {
-            courseIndex++;
-          }
+          // // Taka: Find where in the course info list the course which the user specifies exists.
+          // while (snapshot.data[courseIndex].id != courseId) {
+          //   courseIndex++;
+          // }
 
-          // Taka: Find where in the section list the section which the user specifies exists.
-          while (snapshot.data[courseIndex].sections[sectionIndex].sectionNumber != sectionNum) {
-            sectionIndex++;
-          }        
+          // // Taka: Find where in the section list the section which the user specifies exists.
+          // while (snapshot.data[courseIndex].sections[sectionIndex].sectionNumber != sectionNum) {
+          //   sectionIndex++;
+          // }        
 
           return SafeArea(
             // Taka: SingleChildScrollView makes the entire screen scrollable.

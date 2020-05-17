@@ -84,7 +84,6 @@ class CourseSearchState extends State<CourseSearch> {
         print(_results);  
       }
       else if (_titleQuery == '' && _instructorQuery != '') {     // search by instructor
-        // #TODO
         _results = _courseCatalog.where((course) => course['instructor']['fullName'].toLowerCase().contains(_instructorQuery.toLowerCase())).toList();        
       }      
     });
@@ -140,24 +139,7 @@ class CourseSearchState extends State<CourseSearch> {
           ),
           Container(
             child: SearchResults(_results),
-          ),
-          // Container(
-          //   child: Text(              
-          //     _results.length > 0 ? _results[0]['title'] : 'NULL'
-          //   ),
-          // ),
-          // Container(
-          //   child: _results.length != 0 ? 
-          //         Text("${_results[0]["title"]} ${_results[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
-          //         (
-          //           widget.prevResults.length !=0 ? 
-          //           Text("${widget.prevResults[0]["title"]} ${widget.prevResults[0]["name"]}", style: TextStyle(color: Colors.black, fontSize: 28)) : 
-          //           null
-          //         ),
-          // ),
-          // Container(
-          //   child: _results.length != 0 ? SearchResults(_results) : (widget.prevResults.length != 0 ? SearchResults(widget.prevResults) : null),
-          // ),
+          ),     
         ]
       )
     );
