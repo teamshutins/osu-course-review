@@ -28,7 +28,11 @@ class _SearchResultsState extends State<SearchResults> {
             () {
               final IdAndSection idAndSecNum = IdAndSection(
                 courseId: widget.results[index]["id"], 
+                courseTitle: widget.results[index]["title"],
+                courseInstructor: widget.results[index]["instructor"],                
                 sectionNumber: widget.results[index]["section"],
+                courseName: widget.results[index]["name"],
+                courseDescription: widget.results[index]["description"],
                 results: widget.results
               );
 

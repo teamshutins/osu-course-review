@@ -51,138 +51,83 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Taka: We use FutureBuilder because we will use a future value.
-    // (i.e. courseInfoList() returns the future value.)
-    return FutureBuilder<List<CourseInfo>>(
-      future: courseInfoList(), 
-
-      // Taka: snapshot represents the list of course info in this case.
-      builder: (context, snapshot) {
-
-        if (snapshot.hasData) {  
-          print('=============');
-          print(snapshot.data);
-          // int courseIndex = 0;
-          // String courseId = idAndSection.courseId;  //ex. "CS161"
-          // int sectionIndex = 0;
-          // int sectionNum = idAndSection.sectionNumber;  //ex. 400
-
-          // // Taka: Find where in the course info list the course which the user specifies exists.
-          // while (snapshot.data[courseIndex].id != courseId) {
-          //   courseIndex++;
-          // }
-
-          // // Taka: Find where in the section list the section which the user specifies exists.
-          // while (snapshot.data[courseIndex].sections[sectionIndex].sectionNumber != sectionNum) {
-          //   sectionIndex++;
-          // }        
-
-          return SafeArea(
-            // Taka: SingleChildScrollView makes the entire screen scrollable.
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // SizedBoxes for spacing. We should refactor these ones.
-                  SizedBox(height: 20.0,),
-
-                  // Taka: I should also refactor all these Align widgets. They are just repetitive.
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(                
-                      // Taka: Display the course title and name.
-                      child: Text(
-                        "${snapshot.data[courseIndex].title} ${snapshot.data[courseIndex].name}",
-                      //  'CS 161 Introduction to Computer Science I', 
-                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 32,)
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20.0,),
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      // Taka: Display the course's section number the user specifies.
-                      child: Text(
-                        'Section: ${snapshot.data[courseIndex].sections[sectionIndex].sectionNumber}', 
-                        style: TextStyle(color: Colors.black, fontSize: 24)
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20.0,),
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      // Taka: Display the course description.
-                      child: Text(
-                        'Description: ${snapshot.data[courseIndex].description}', 
-                        style: TextStyle(color: Colors.black, fontSize: 24)
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20.0,),
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      // Taka: Display the instructor's name of the section the user specifies.
-                      child: Text(
-                        'Instructor: ${snapshot.data[courseIndex].sections[sectionIndex].instructor.firstName} ${snapshot.data[courseIndex].sections[sectionIndex].instructor.lastName}', 
-                        style: TextStyle(color: Colors.black, fontSize: 24)
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20.0,),
-
-                  // Taka: When tapping this button, the popup or another screen to write a review will show up.
-                  WriteReviewButton(courseId: idAndSection.courseId),
-
-                  SizedBox(height: 20.0,),
-                  
-                  // Taka: This is to retrieve the review data from DB (Google Firebase).
-                  StreamBuilder(
-                    // Taka: We should start a new collection in Firebase Database and replace the collection name here.
-                    stream: Firestore.instance.collection('test_data').where("id", isEqualTo: idAndSection.courseId).snapshots(),
-                    builder: (context, snapshot) {
-                      // Taka: If there is at least one item in DB, build and show the list of reviews.
-                      if (snapshot.hasData && snapshot.data.documents != null && snapshot.data.documents.length > 0) {   
-                        return ReviewList(snapshot: snapshot);
-                      }
-                      // Taka: If there is no item in DB, don't show anything.
-                      else {
-                        return Container();
-                      }
-                    }
-                  )
-                ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // SizedBoxes for spacing. We should refactor these ones.
+            SizedBox(height: 20.0,),
+            
+            // Taka: I should also refactor all these Align widgets. They are just repetitive.
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(                
+                // Taka: Display the course title and name.
+                child: Text(
+                  "${idAndSection.courseTitle} ${idAndSection.courseName}",
+                //  'CS 161 Introduction to Computer Science I', 
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 32,)
+                ),
               ),
             ),
-          );
-        } else {
-          return Container();
-        }
-      }
+
+            SizedBox(height: 20.0,),
+
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                // Taka: Display the course's section number the user specifies.
+                child: Text(
+                  'Section: ${idAndSection.sectionNumber}', 
+                  style: TextStyle(color: Colors.black, fontSize: 24)
+                ),
+              ),
+            ),
+
+            SizedBox(height: 20.0,),
+
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                // Taka: Display the course description.
+                child: Text(
+                  'Description: ${idAndSection.courseDescription}', 
+                  style: TextStyle(color: Colors.black, fontSize: 24)
+                ),
+              ),
+            ),
+
+            SizedBox(height: 20.0,),
+
+            // Taka: When tapping this button, the popup or another screen to write a review will show up.
+            WriteReviewButton(courseId: idAndSection.courseId),
+
+            SizedBox(height: 20.0,),
+
+            // Taka: This is to retrieve the review data from DB (Google Firebase).
+            StreamBuilder(
+              // Taka: We should start a new collection in Firebase Database and replace the collection name here.
+              // David: find reviews list using courseTitle instead of courseId
+              stream: Firestore.instance.collection('test_data').where("id", isEqualTo: idAndSection.courseTitle).snapshots(),
+              builder: (context, snapshot) {
+                
+                // Taka: If there is at least one item in DB, build and show the list of reviews.
+                if (snapshot.hasData && snapshot.data.documents != null && snapshot.data.documents.length > 0) {                     
+                  return ReviewList(snapshot: snapshot);
+                }
+                // Taka: If there is no item in DB, don't show anything.
+                else {
+                  return Container();
+                }
+              }
+            )
+          ],
+        ),
+      )
     );
-  }
-  
-  //Taka: This function parses the JSON file and returns a list of course information
-  Future<List<CourseInfo>> courseInfoList() async {
-    String jsonString = await rootBundle.loadString('assets/course_info.json');
-    
-    var jsonResponse = json.decode(jsonString);
-    var courseList = jsonResponse as List;
-    
-    List<CourseInfo> infoList = courseList.map((course) => CourseInfo.fromJson(course)).toList();
-    
-    return infoList;
-  }
+  }         
 }
 
 

@@ -49,10 +49,19 @@ class CourseSearchState extends State<CourseSearch> {
     });    
   } 
 
+  void loadPreviousResults() {
+    if (widget.prevResults.length > 0) {
+      setState(() {
+        _results = widget.prevResults;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     loadCourses(); 
+    loadPreviousResults();
   }
 
   void handleTitleQuery(value) {
