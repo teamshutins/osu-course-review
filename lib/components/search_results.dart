@@ -28,10 +28,10 @@ class _SearchResultsState extends State<SearchResults> {
             //Taka: passing an anonymous function instead of the pre-defined _goToCourse
             () {
               final IdAndSection idAndSecNum = IdAndSection(
-                    courseId: widget.results[0]["id"], 
-                    sectionNumber: widget.results[0]["sections"][index]["sectionNumber"],
-                    results: widget.results
-                  );
+                courseId: widget.results[0]["id"], 
+                sectionNumber: widget.results[0]["sections"][index]["sectionNumber"],
+                results: widget.results
+              );
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CourseDescriptionScreen(idAndSection: idAndSecNum)),
