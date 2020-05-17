@@ -84,7 +84,6 @@ class CustomDialog extends StatelessWidget {
         child: Text("Submit Review", style: TextStyle(color: Colors.blue, fontSize: 25.0), textAlign: TextAlign.center,),
       ),
       onTap: () {
-        print(courseId);
         Navigator.pop(context); //This event handler should be used to submit the actual review.
       },
     );
