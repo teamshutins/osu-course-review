@@ -213,12 +213,8 @@ class ReviewList extends StatelessWidget {
 
   Widget showReviewListTile(post) {
     return ListTile(
-      title: Text(
-        post['comment']
-      ),
-      subtitle: Text(
-        post['name']
-      ),
+      title: Text( post['comment'] ),
+      subtitle: Text( post['name'] ),
     );
   }
 }

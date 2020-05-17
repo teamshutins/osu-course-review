@@ -29,32 +29,36 @@ class CustomDialog extends StatelessWidget {
   }
 
   Widget buildFormContainer(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    final _nameKey = GlobalKey<FormState>();
     return Container(
       padding: EdgeInsets.only(top: 5.0,),
       margin: EdgeInsets.only(top: 5.0, right: 5.0),
       decoration: providePopupDecoration(),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            buildInputForm(_formKey, true),
-            buildInputForm(_nameKey, false),
-            buildSubmitButton(context),
-          ],
-        ),
-      ),
+      child: buildSingleChildScrollView(context),
     );
   }
-
+  
   BoxDecoration providePopupDecoration() {
     return BoxDecoration(
       color: Colors.orange,
       shape: BoxShape.rectangle,
       borderRadius: BorderRadius.circular(16.0),
       boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 0.0, offset: Offset(0.0, 0.0),),],
+    );
+  }
+
+  Widget buildSingleChildScrollView(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    final _nameKey = GlobalKey<FormState>();
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          buildInputForm(_formKey, true),
+          buildInputForm(_nameKey, false),
+          buildSubmitButton(context),
+        ],
+      ),
     );
   }
       
@@ -70,22 +74,6 @@ class CustomDialog extends StatelessWidget {
           ],
         )
       )
-    );
-  }
-
-  Widget buildSubmitButton(BuildContext context) {
-    return InkWell(
-      child: Container(
-        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
-        ),
-        child: Text("Submit Review", style: TextStyle(color: Colors.blue, fontSize: 25.0), textAlign: TextAlign.center,),
-      ),
-      onTap: () {
-        Navigator.pop(context); //This event handler should be used to submit the actual review.
-      },
     );
   }
 
@@ -142,6 +130,22 @@ class CustomDialog extends StatelessWidget {
         filled: true,
         contentPadding: EdgeInsets.symmetric(vertical: 17)
       ),
+    );
+  }
+
+  Widget buildSubmitButton(BuildContext context) {
+    return InkWell(
+      child: Container(
+        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
+        ),
+        child: Text("Submit Review", style: TextStyle(color: Colors.blue, fontSize: 25.0), textAlign: TextAlign.center,),
+      ),
+      onTap: () {
+        Navigator.pop(context); //This event handler should be used to submit the actual review.
+      },
     );
   }
 
