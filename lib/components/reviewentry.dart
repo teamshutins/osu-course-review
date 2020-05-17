@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
+  
+  // Taka: This form needs the courseId info. It needs to be uploaded to DB.
+  final String courseId;
+  CustomDialog({Key key, this.courseId}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       elevation: 0.0,
       backgroundColor: Colors.transparent,
-      child: dialogContent(context),
+      // Taka: Passing the courseId too.
+      child: dialogContent(context, courseId),
     );
   }
 
-  Widget dialogContent(BuildContext context) {
+  // Taka: courseId is expected to be used inside onTap: () {}
+  Widget dialogContent(BuildContext context, String courseId) {
     final _formKey = GlobalKey<FormState>();
     final _nameKey = GlobalKey<FormState>();
     return Container(

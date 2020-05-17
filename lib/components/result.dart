@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import '../models/id_section.dart';
 
 class Result extends StatelessWidget {
   final course;
@@ -20,7 +21,7 @@ class Result extends StatelessWidget {
           ),
         ),
         child: Text(
-          '${course['title']} ${course['name']}',
+          'Section ${course['sectionNumber']} ${course['instructor']['firstName']} ${course['instructor']['lastName']}',
           style: TextStyle(fontSize: 20)
         ),
       ),
