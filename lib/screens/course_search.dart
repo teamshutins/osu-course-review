@@ -9,8 +9,7 @@ import 'dart:convert';
 // import custom
 import '../components/search_results.dart';
 
-class CourseSearch extends StatefulWidget {
-  
+class CourseSearch extends StatefulWidget {  
   final List prevResults;
   CourseSearch({this.prevResults});
 

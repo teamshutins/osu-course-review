@@ -101,6 +101,19 @@ class Description extends StatelessWidget {
 
             SizedBox(height: 20.0,),
 
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                // Taka: Display the instructor's name of the section the user specifies.
+                child: Text(
+                  'Instructor: ${idAndSection.courseInstructor['fullName']}', 
+                  style: TextStyle(color: Colors.black, fontSize: 24)
+                ),
+              ),
+            ),
+
+            SizedBox(height: 20.0,),
+
             // Taka: When tapping this button, the popup or another screen to write a review will show up.
             WriteReviewButton(courseId: idAndSection.courseId),
 

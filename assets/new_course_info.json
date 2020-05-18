@@ -5,7 +5,7 @@
 [
     {
         "id": "CS161_400",
-        "title": "CS 161",
+        "title": "CS161",
         "name": "Introduction to Computer Science I",
         "section": 400,
         "instructor": {
@@ -17,7 +17,7 @@
     },
     {
         "id": "CS161_401",
-        "title": "CS 161",
+        "title": "CS161",
         "name": "Introduction to Computer Science I",
         "section": 401,
         "instructor": {
@@ -29,7 +29,7 @@
     },    
     {
         "id": "CS161_402",
-        "title": "CS 161",
+        "title": "CS161",
         "name": "Introduction to Computer Science I",
         "section": 401,
         "instructor": {
@@ -41,7 +41,7 @@
     },
     {
         "id": "CS162_400",
-        "title": "CS 162",
+        "title": "CS162",
         "name": "Introduction to Computer Science II",
         "section": 400,
         "instructor": {
@@ -53,7 +53,7 @@
     },
     {
         "id": "CS162_401",
-        "title": "CS 162",
+        "title": "CS162",
         "name": "Introduction to Computer Science II",
         "section": 401,
         "instructor": {
@@ -65,7 +65,7 @@
     },      
     {
         "id": "CS225_400",
-        "title": "CS 225",
+        "title": "CS225",
         "name": "Discrete Structures in Computer Science",
         "section": 400,
         "instructor": {
@@ -74,20 +74,5 @@
             "fullName": "Samina Ehsan"
         },
         "description": " An introduction to the discrete mathematics of computer science, including logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory. (Note: Students may take either MTH 231 or CS 225, but cannot receive credit for both.)"
-    },        
-    {
-        "id": "CS225_400",
-        "title": "CS 225",
-        "name": "Discrete Structures in Computer Science ",
-        "sections": [
-            {
-            "sectionNumber": 400,
-            "instructor": {
-                "firstName": "Samina",
-                "lastName": "Ehsan"
-            }
-            }
-        ],
-        "description": "An introduction to the discrete mathematics of computer science, including logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory. (Note: Students may take either MTH 231 or CS 225, but cannot receive credit for both.)"
-    }
+    }           
   ]  
