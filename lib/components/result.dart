@@ -7,8 +7,6 @@ class Result extends StatelessWidget {
 
   Result(this.course, this._goToCourse);
 
-  StyledContainer _sectionListBackground = SectionListBackground(20.00, Colors.blue, Colors.yellow);
-
   @override 
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,12 +14,7 @@ class Result extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          _sectionListBackground.render(),
-          //SectionContainer(_sectionListBackground),
-          Text(
-            '${course['title']}_${course['section']} ${course['instructor']['fullName']}',
-            style: TextStyle(fontSize: 20)
-          ),
+          
         ],
       ),
       /*child: Container(
@@ -39,19 +32,5 @@ class Result extends StatelessWidget {
         ),
       ),*/
     );
-  }
-}
-
-class SectionContainer extends StatelessWidget {
-
-  final StyledContainer sectionListBackground;
-
-  const SectionContainer(this.sectionListBackground);
-
-  @override
-  Widget build(BuildContext context) {
-    sectionListBackground.clone();
-    sectionListBackground.render();
-    return Container();
   }
 }

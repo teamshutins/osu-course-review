@@ -14,7 +14,6 @@ abstract class StyledContainer {
   Widget render();
 }
 
-
 class SectionListBackground extends StyledContainer {
 
   Color color1;
@@ -36,8 +35,8 @@ class SectionListBackground extends StyledContainer {
   Widget render() {
     return Container(
       height: height,
-//      color: color2,
-      padding: const EdgeInsets.all(6),
+      color: color2,
+//      padding: const EdgeInsets.all(6),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
