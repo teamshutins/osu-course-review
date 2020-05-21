@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../prototype/styled_container.dart';
+//import '../models/id_section.dart';
 
 class Result extends StatelessWidget {
   final course;
@@ -11,13 +11,7 @@ class Result extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: _goToCourse,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          
-        ],
-      ),
-      /*child: Container(
+      child: Container(
         padding: const EdgeInsets.all(6),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -30,7 +24,7 @@ class Result extends StatelessWidget {
           '${course['title']}_${course['section']} ${course['instructor']['fullName']}',
           style: TextStyle(fontSize: 20)
         ),
-      ),*/
+      ),
     );
   }
 }
