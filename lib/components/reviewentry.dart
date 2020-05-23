@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class CustomDialog extends StatelessWidget {
   
@@ -21,6 +23,11 @@ class CustomDialog extends StatelessWidget {
   Widget dialogContent(BuildContext context, String courseId) {
     final _formKey = GlobalKey<FormState>();
     final _nameKey = GlobalKey<FormState>();
+    final CollectionReference reviewCollection = Firestore.instance.collection('reviews');
+    String name = '';
+    String review = '';
+    String courseTitle = courseId.substring(0,5);
+
     return Container(
       margin: EdgeInsets.only(left: 5.0, right: 5.0),
       child: Stack(
@@ -86,6 +93,10 @@ class CustomDialog extends StatelessWidget {
                               child: Center(
                                 child: Container(
                                   child: TextFormField(
+                                    validator: (val) => val.isEmpty ? 'Enter a review' : null,
+                                    onChanged: (String val){
+                                      review = val;
+                                    },
                                     autocorrect: true,
                                     autofocus: true,
                                     maxLength: 200,
@@ -147,6 +158,10 @@ class CustomDialog extends StatelessWidget {
                               child: Center(
                                 child: Container(
                                   child: TextFormField(
+                                    validator: (val) => val.isEmpty ? 'Enter a name' : null,
+                                    onChanged: (String val){
+                                      name = val;
+                                    } ,
                                     autocorrect: true,
                                     autofocus: true,
                                     maxLength: 30,
@@ -186,7 +201,22 @@ class CustomDialog extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pop(context); //This event handler should be used to submit the actual review.
+                      if(_formKey.currentState.validate() && _nameKey.currentState.validate()){
+                        reviewCollection.document().setData({
+                          'comment': review,
+                          'dateTime': DateTime.now(),
+                          'id': courseTitle,
+                          'name': name
+
+                        });
+
+                        print ("Hello");
+                        print (name);
+                        print(review);
+                        Navigator.pop(context);
+                      }
+                      
+                       //This event handler should be used to submit the actual review.
                     },
                   )
                 ],
