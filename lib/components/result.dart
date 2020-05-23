@@ -21,7 +21,7 @@ class Result extends StatelessWidget {
           ),
         ),
         child: Text(
-          'Section ${course['sectionNumber']} ${course['instructor']['firstName']} ${course['instructor']['lastName']}',
+          '${course['title']}_${course['section']} ${course['instructor']['fullName']}',
           style: TextStyle(fontSize: 20)
         ),
       ),
