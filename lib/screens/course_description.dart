@@ -5,15 +5,12 @@
 // source3: https://medium.com/@muddassirm/load-json-data-in-flutter-in-different-ways-e3312e6a317a
 
 
-import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'course_search.dart';
 import '../models/id_section.dart';
-import '../models/course_info.dart';
 import '../components/reviewentry.dart';
+import '../builder/button_builder.dart';
 
 // Taka: Root widget of this screen.
 class CourseDescriptionScreen extends StatelessWidget {
@@ -152,21 +149,20 @@ class WriteReviewButton extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    ReviewButtonBuilder reviewButton = ReviewButtonBuilder(function: () {buildShowDialog(context);});
+    
     return Container(
       child: ButtonTheme(
         minWidth: 200,
         height: 50,
-        child: RaisedButton(
-          child: Text('WRITE REVIEW', style: TextStyle(color: Colors.white, fontSize: 24)),
-          color: Colors.orange,
-          // Taka: Show the review entry form popup.
-          onPressed: () {
-            // Taka: Passing the courseId because the form needs to uplodad the info to DB.
-            showDialog(context: context, builder: (BuildContext context) => CustomDialog(courseId: courseId));
-          },
-        ),
+        child: reviewButton.getButton(),
       ),
     );
+  }
+
+  Future buildShowDialog(BuildContext context) {
+    return showDialog(context: context, builder: (BuildContext context) => CustomDialog(courseId: courseId));
   }
 }
 
