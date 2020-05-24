@@ -23,7 +23,7 @@ class CustomDialog extends StatelessWidget {
   Widget dialogContent(BuildContext context, String courseId) {
     final _formKey = GlobalKey<FormState>();
     final _nameKey = GlobalKey<FormState>();
-    final CollectionReference reviewCollection = Firestore.instance.collection('reviews');
+    final CollectionReference reviewCollection = Firestore.instance.collection('test_data');
     String name = '';
     String review = '';
     String courseTitle = courseId.substring(0,5);
@@ -209,10 +209,6 @@ class CustomDialog extends StatelessWidget {
                           'name': name
 
                         });
-
-                        print ("Hello");
-                        print (name);
-                        print(review);
                         Navigator.pop(context);
                       }
                       
