@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 //import '../models/id_section.dart';
 
+import '../builder/result_text_builder.dart';
+
+
 class Result extends StatelessWidget {
   final course;
   final Function _goToCourse;  
@@ -20,10 +23,12 @@ class Result extends StatelessWidget {
             colors: [Colors.deepOrange, Colors.orange]
           ),
         ),
-        child: Text(
-          '${course['title']}_${course['section']} ${course['instructor']['fullName']}',
-          style: TextStyle(fontSize: 20)
-        ),
+        child: ResultTextBuilder(
+          title: course['title'],
+          section: course['section'],
+          instructor: course['instructor']['fullName'],
+          fontSize: 20
+        ).buildResultText(),
       ),
     );
   }

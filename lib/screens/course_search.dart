@@ -8,6 +8,7 @@ import 'dart:convert';
 
 // import custom
 import '../components/search_results.dart';
+import '../builder/button_builder.dart';
 
 class CourseSearch extends StatefulWidget {  
   final List prevResults;
@@ -24,6 +25,8 @@ class CourseSearchState extends State<CourseSearch> {
   String _instructorQuery = '';
   List<dynamic> _courseCatalog = [];
   List<dynamic> _results = [];
+
+  
 
   void loadCourses() async {
     List<dynamic> courseData = jsonDecode(await rootBundle.loadString('assets/course_info.json'));   
@@ -99,6 +102,9 @@ class CourseSearchState extends State<CourseSearch> {
   
   @override
   Widget build(BuildContext context) {   
+    
+    SearchButtonBuilder searchButton = SearchButtonBuilder(function: () {searchMethod(context);});
+
     return Scaffold(
       body: Column(
         children: [
@@ -130,16 +136,7 @@ class CourseSearchState extends State<CourseSearch> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      FocusScopeNode currentFocus = FocusScope.of(context);
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
-                      }
-                      handleSearch();
-                    },
-                    child: Text('Find course'),
-                  ),
+                  child: searchButton.getButton(),
                 ),
               ],
             )
@@ -151,5 +148,13 @@ class CourseSearchState extends State<CourseSearch> {
         ]
       )
     );
+  }
+
+  void searchMethod(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+    handleSearch();
   }
 }

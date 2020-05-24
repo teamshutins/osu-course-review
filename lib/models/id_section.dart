@@ -18,6 +18,5 @@ class IdAndSection {
     this.results, 
     this.courseTitle, 
     this.courseInstructor 
-  });
-  
+  });  
 }
