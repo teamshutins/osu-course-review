@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ResultTextBuilder {
   final String title;
-  final String section;
+  final int section;
   final String instructor;
   final double fontSize;
 
