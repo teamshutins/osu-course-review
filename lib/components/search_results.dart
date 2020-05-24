@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import './result.dart';
 import '../screens/course_description.dart';
 import '../models/id_section.dart';
+import '../builder/result_display_builder.dart';
 
 class SearchResults extends StatefulWidget {
   final List<dynamic> results;  
