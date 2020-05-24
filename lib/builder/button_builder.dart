@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+// This class defines an abstract interface that is common to all types of button builders.
 abstract class ButtonBuilderBase {
 
   RaisedButton getButton() {
@@ -16,7 +16,8 @@ abstract class ButtonBuilderBase {
   VoidCallback getFunction();
 }
 
-
+// This concrete builder provides a specific implementation of the construction steps
+// to create the search button on the course search screen. 
 class SearchButtonBuilder extends ButtonBuilderBase {
   
   VoidCallback function;
@@ -38,7 +39,7 @@ class SearchButtonBuilder extends ButtonBuilderBase {
   }
 }
 
-
+// This is another concrete builder to be used for the write review button on the course description screen. 
 class ReviewButtonBuilder extends ButtonBuilderBase {
   
   VoidCallback function;
