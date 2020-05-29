@@ -120,7 +120,7 @@ class Description extends StatelessWidget {
             StreamBuilder(
               // Taka: We should start a new collection in Firebase Database and replace the collection name here.
               // David: find reviews list using courseTitle instead of courseId
-              stream: Firestore.instance.collection('test_data').where("id", isEqualTo: idAndSection.courseTitle).orderBy('dateTime', descending:true).snapshots(),
+              stream: Firestore.instance.collection('reviews').where("id", isEqualTo: idAndSection.courseId).orderBy('dateTime', descending:true).snapshots(),
               builder: (context, snapshot) {
                 
                 // Taka: If there is at least one item in DB, build and show the list of reviews.

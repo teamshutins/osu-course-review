@@ -1,5 +1,4 @@
-# osu-course-review (Sprint 2 Pair 2 - Taka's part)
-This version implements the updated "Course Description Screen" which reads the data from the JSON file.
+# osu-course-review
 
 ############ NOTE ################
 
