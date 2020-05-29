@@ -26,8 +26,6 @@ class CourseSearchState extends State<CourseSearch> {
   List<dynamic> _courseCatalog = [];
   List<dynamic> _results = [];
 
-  
-
   void loadCourses() async {
     List<dynamic> courseData = jsonDecode(await rootBundle.loadString('assets/course_info.json'));   
     List<dynamic> courseDataBySection = [];    
@@ -47,7 +45,7 @@ class CourseSearchState extends State<CourseSearch> {
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog 
     setState(() {
       _courseCatalog = courseDataBySection;
-      print(_courseCatalog);
+//      print(_courseCatalog);
     });    
   } 
 
@@ -92,7 +90,7 @@ class CourseSearchState extends State<CourseSearch> {
       }
       else if (_titleQuery != '' && _instructorQuery == '') {     // search by title
         _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();        
-        print(_results);  
+//        print(_results);  
       }
       else if (_titleQuery == '' && _instructorQuery != '') {     // search by instructor
         _results = _courseCatalog.where((course) => course['instructor']['fullName'].toLowerCase().contains(_instructorQuery.toLowerCase())).toList();        
