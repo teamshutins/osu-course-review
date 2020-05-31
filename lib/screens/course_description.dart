@@ -182,12 +182,14 @@ class ReviewList extends StatelessWidget {
         itemCount: snapshot.data.documents.length,
         itemBuilder: (context, index) {
           var post = snapshot.data.documents[index];
-          return ListTile(
-            title: Text(
-              post['comment']
-            ),
-            subtitle: Text(
-              post['name']
+          return Card(
+            color: Colors.orange[50],
+            child: ListTile(
+              title: Text(post['comment'], style: TextStyle(color: Colors.black, fontSize: 20, fontStyle: FontStyle.italic)),
+              subtitle: Container(
+                alignment: Alignment.bottomRight, 
+                child: Text(post['name'], style: TextStyle(color: Colors.black.withOpacity(0.7), fontSize: 16, fontStyle: FontStyle.italic)),
+              ),
             ),
           );
         },
