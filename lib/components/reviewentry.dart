@@ -49,7 +49,7 @@ class _CustomDialogState extends State<CustomDialog> {
 
   BoxDecoration providePopupDecoration() {
     return BoxDecoration(
-      color: Colors.orange,
+      color: Colors.orange[300],
       shape: BoxShape.rectangle,
       borderRadius: BorderRadius.circular(16.0),
       boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 0.0, offset: Offset(0.0, 0.0),),],
@@ -62,97 +62,87 @@ class _CustomDialogState extends State<CustomDialog> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          buildInputForm(true),
-          buildInputForm(false),
+          buildReviewField(),
+          buildNameField(),
           buildSubmitButton(context)
         ],
       ),
     );
   }
 
-  Widget buildInputForm(bool isCommentField) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: Stack(
-          children: <Widget>[
-            buildInputFieldContainer(isCommentField ? 150 : 42),
-            buildInputFieldHint(isCommentField ? "Write Review" : "Reviewer Name"),
-            buildInputField(isCommentField),
-          ],
+  Widget buildReviewField() {
+    return Form(
+      autovalidate: true,
+      key: _formKey,
+      child: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          child: buildReviewTextFormField(),
         )
       )
     );
   }
 
-  Widget buildInputFieldContainer(double height) {
-    return Container(
-      width: double.infinity,
-      height: height,
-      margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
-      padding: EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 1),
-        borderRadius: BorderRadius.circular(5),
-        shape: BoxShape.rectangle,
-      ),
-    );
-  }
-
-  Widget buildInputFieldHint(String inputFieldHint) {
-    return Positioned(
-      left: 50, top: 12,
-      child: Container(
-        padding: EdgeInsets.only(bottom: 0, left: 0, right: 0),
-        color: Colors.orange,
-        child: Text(inputFieldHint, style: TextStyle(color: Colors.black, fontSize: 10),
-        ),
-      )
-    );
-  }
-
-  Widget buildInputField(bool isCommentField) {
-    return Positioned(
-      left: 21, right: 21, top: 21, bottom: isCommentField ? 0 : 2,
-      child: Form(
-        key: isCommentField ? _formKey : _nameKey,
-        child: Center(
-          child: Container(
-            child: buildTextFormField(isCommentField)
-          )
-        )
-      )
-    );
-  }
-
-  Widget buildTextFormField(bool isCommentField) {
+  Widget buildReviewTextFormField() {
     return TextFormField(
-      validator: (val) => val.isEmpty ? (isCommentField ? 'Enter a review' : 'Enter a name') : null,
-      onChanged: (String val) { isCommentField ? review = val : name = val; },
+      validator: (val) => val.isEmpty ? 'Enter a review' : null,
+      onChanged: (String val) { review = val; },
       autocorrect: true,
       autofocus: true,
-      maxLength: isCommentField ? 200 : 30,
-      maxLines: isCommentField ? 6 : 1,
+      maxLength: 200,
+      maxLines: 5,
       decoration: InputDecoration(
         border: UnderlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
         fillColor: Colors.white,
         filled: true,
-        contentPadding: EdgeInsets.symmetric(vertical: 17)
+//        contentPadding: EdgeInsets.only(top: 10, bottom: 5),//symmetric(vertical: 10),
+        labelText: 'Write Review',
       ),
     );
+  }
+
+  Widget buildNameField() {
+    return Form(
+      autovalidate: true,
+      key: _nameKey,
+      child: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          child: buildNameTextFormField(),
+        )
+      )
+    );
+  }
+
+  Widget buildNameTextFormField() {
+    return TextFormField(
+      validator: (val) => val.isEmpty ? 'Enter a name' : null,
+      onChanged: (String val) { name = val; },
+      autocorrect: true,
+//      autofocus: true,
+      maxLength: 30,
+      maxLines: 1,
+      decoration: InputDecoration(
+        border: UnderlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+        fillColor: Colors.white,
+        filled: true,
+//        contentPadding: EdgeInsets.only(top: 10, bottom: 5),//symmetric(vertical: 10),
+        labelText: 'Your Name',
+      ),
+    ); 
   }
 
   //This section of code manipulates the "Submit Review" portion of the popup
   Widget buildSubmitButton(BuildContext context) {
     final CollectionReference reviewCollection = Firestore.instance.collection('reviews');
-    return InkWell(
+    return GestureDetector(
       child: Container(
-        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+        padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[300],
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
         ),
-        child: Text("Submit Review", style: TextStyle(color: Colors.blue, fontSize: 25.0), textAlign: TextAlign.center,),
+        child: Text("Submit Review", style: TextStyle(color: Colors.blue, fontSize: 25.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
       ),
       onTap: () {
         if(_formKey.currentState.validate() && _nameKey.currentState.validate()) {

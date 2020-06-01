@@ -54,60 +54,33 @@ class Description extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // SizedBoxes for spacing. We should refactor these ones.
+            // SizedBoxes for spacing.
             SizedBox(height: 20.0,),
             
-            // Taka: I should also refactor all these Align widgets. They are just repetitive.
             Align(
               alignment: Alignment.centerLeft,
-              child: Container(                
+              child: Container(           
+                padding: EdgeInsets.symmetric(horizontal: 15.0),     
                 // Taka: Display the course title and name.
                 child: Text(
                   "${idAndSection.courseTitle} ${idAndSection.courseName}",
                 //  'CS 161 Introduction to Computer Science I', 
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 32,)
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 36,)
                 ),
               ),
             ),
 
             SizedBox(height: 20.0,),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                // Taka: Display the course's section number the user specifies.
-                child: Text(
-                  'Section: ${idAndSection.sectionNumber}', 
-                  style: TextStyle(color: Colors.black, fontSize: 24)
-                ),
-              ),
-            ),
+            buildAlignedTexts('Section: ', '${idAndSection.sectionNumber}'),
 
             SizedBox(height: 20.0,),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                // Taka: Display the course description.
-                child: Text(
-                  'Description: ${idAndSection.courseDescription}', 
-                  style: TextStyle(color: Colors.black, fontSize: 24)
-                ),
-              ),
-            ),
+            buildAlignedTexts('Description: ', '${idAndSection.courseDescription}'),
 
             SizedBox(height: 20.0,),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                // Taka: Display the instructor's name of the section the user specifies.
-                child: Text(
-                  'Instructor: ${idAndSection.courseInstructor['fullName']}', 
-                  style: TextStyle(color: Colors.black, fontSize: 24)
-                ),
-              ),
-            ),
+            buildAlignedTexts('Instructor: ', '${idAndSection.courseInstructor['fullName']}'),
 
             SizedBox(height: 20.0,),
 
@@ -136,6 +109,25 @@ class Description extends StatelessWidget {
           ],
         ),
       )
+    );
+  }
+
+  Align buildAlignedTexts(String infoKey, String infoValue) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 15.0),
+        // Taka: Display the course's section number the user specifies.
+        child: RichText(
+          text: TextSpan(
+            style: TextStyle(color: Colors.black, fontSize: 24),
+            children: [
+              TextSpan(text: infoKey, style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: infoValue),
+            ],
+          ),
+        ),
+      ),
     );
   }         
 }
@@ -183,6 +175,7 @@ class ReviewList extends StatelessWidget {
         itemBuilder: (context, index) {
           var post = snapshot.data.documents[index];
           return Card(
+            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
             color: Colors.orange[50],
             child: ListTile(
               title: Text(post['comment'], style: TextStyle(color: Colors.black, fontSize: 20, fontStyle: FontStyle.italic)),
