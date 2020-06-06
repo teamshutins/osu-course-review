@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import custom
 import '../components/search_results.dart';
@@ -25,31 +26,17 @@ class CourseSearchState extends State<CourseSearch> {
   String _instructorQuery = '';
   List<dynamic> _courseCatalog = [];
   List<dynamic> _results = [];
+  Firestore _firestore = Firestore.instance;  
 
-  
+  void loadCourses() async {   
+    List<dynamic> courseDataBySection = [];   
 
-  void loadCourses() async {
-    List<dynamic> courseData =
-        jsonDecode(await rootBundle.loadString('assets/course_info.json'));
-    List<dynamic> courseDataBySection = [];
-
-    for (Map<String, dynamic> course in courseData) {
-      for (Map<String, dynamic> section in course['sections']) {
-        Map<String, dynamic> tempCourse = {...course};
-        tempCourse['section'] = section['sectionNumber'];
-        tempCourse['instructor'] = section['instructor'];
-        tempCourse['instructor']['fullName'] =
-            '${section['instructor']['firstName']} ${section['instructor']['lastName']}';
-        tempCourse['id'] = '${course['id']}_${section['sectionNumber']}';
-        tempCourse.remove('sections');
-        courseDataBySection.add(tempCourse);
-      }
-    }
+    QuerySnapshot querySnapshot = await _firestore.collection('catalog').getDocuments();
+    querySnapshot.documents.forEach((f) => courseDataBySection.add(f.data));      
 
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog
     setState(() {
       _courseCatalog = courseDataBySection;
-//      print(_courseCatalog);
     });
   }
 
