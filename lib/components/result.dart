@@ -3,32 +3,30 @@ import 'package:flutter/material.dart';
 
 import '../builder/result_text_builder.dart';
 
-
 class Result extends StatelessWidget {
   final course;
-  final Function _goToCourse;  
+  final Function _goToCourse;
 
   Result(this.course, this._goToCourse);
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: _goToCourse,
       child: Container(
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.deepOrange, Colors.orange]
-          ),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.deepOrange, Colors.orange]),
         ),
         child: ResultTextBuilder(
-          title: course['title'],
-          section: course['section'],
-          instructor: course['instructor']['fullName'],
-          fontSize: 20
-        ).buildResultText(),
+                title: course['title'],
+                section: course['section'],
+                instructor: course['instructor']['fullName'],
+                fontSize: 20)
+            .buildResultText(),
       ),
     );
   }

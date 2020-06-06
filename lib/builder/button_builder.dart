@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-
 abstract class ButtonBuilderBase {
-
   RaisedButton getButton() {
     return RaisedButton(
       elevation: getElevation(),
@@ -22,15 +20,13 @@ abstract class ButtonBuilderBase {
   VoidCallback getFunction();
 }
 
-
 class SearchButtonBuilder extends ButtonBuilderBase {
-  
   VoidCallback function;
   SearchButtonBuilder({this.function});
 
   @override
   double getElevation() {
-    return null;
+    return 15.0;
   }
 
   @override
@@ -42,7 +38,7 @@ class SearchButtonBuilder extends ButtonBuilderBase {
   ShapeBorder getShape() {
     return null;
   }
-  
+
   @override
   Text getText() {
     return Text('Find course');
@@ -59,12 +55,10 @@ class SearchButtonBuilder extends ButtonBuilderBase {
   }
 }
 
-
 class ReviewButtonBuilder extends ButtonBuilderBase {
-  
   VoidCallback function;
   ReviewButtonBuilder({this.function});
- 
+
   @override
   double getElevation() {
     return 35.0;
@@ -73,11 +67,10 @@ class ReviewButtonBuilder extends ButtonBuilderBase {
   @override
   ShapeBorder getShape() {
     return RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(200.0),
-      side: BorderSide(color: Colors.orange[300], width: 5.0)
-    );
+        borderRadius: BorderRadius.circular(200.0),
+        side: BorderSide(color: Colors.orange[300], width: 5.0));
   }
- 
+
   @override
   EdgeInsetsGeometry getPadding() {
     return EdgeInsets.symmetric(vertical: 15.0, horizontal: 35.0);
@@ -85,7 +78,8 @@ class ReviewButtonBuilder extends ButtonBuilderBase {
 
   @override
   Text getText() {
-    return Text('WRITE REVIEW', style: TextStyle(color: Colors.white, fontSize: 30));
+    return Text('WRITE REVIEW',
+        style: TextStyle(color: Colors.white, fontSize: 30));
   }
 
   @override
