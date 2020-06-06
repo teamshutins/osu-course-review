@@ -22,6 +22,7 @@ class CourseDescriptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white, size: 36.0,),          
           // Taka: Go back to the main screen.
