@@ -20,6 +20,7 @@ class _SearchResultsState extends State<SearchResults> {
   Widget build(BuildContext context) {    
     return Expanded(
       child: ListView.builder(
+        padding: const EdgeInsets.all(0),
         itemCount: widget.results.length,
         itemBuilder: (BuildContext context, int index) {
           return Result(

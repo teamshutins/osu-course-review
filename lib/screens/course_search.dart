@@ -26,6 +26,8 @@ class CourseSearchState extends State<CourseSearch> {
   List<dynamic> _courseCatalog = [];
   List<dynamic> _results = [];
 
+  
+
   void loadCourses() async {
     List<dynamic> courseData = jsonDecode(await rootBundle.loadString('assets/course_info.json'));   
     List<dynamic> courseDataBySection = [];    
@@ -45,7 +47,7 @@ class CourseSearchState extends State<CourseSearch> {
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog 
     setState(() {
       _courseCatalog = courseDataBySection;
-//      print(_courseCatalog);
+      print(_courseCatalog);
     });    
   } 
 
@@ -90,7 +92,7 @@ class CourseSearchState extends State<CourseSearch> {
       }
       else if (_titleQuery != '' && _instructorQuery == '') {     // search by title
         _results = _courseCatalog.where((course) => course['title'].toLowerCase().contains(_titleQuery.toLowerCase())).toList();        
-//        print(_results);  
+        print(_results);  
       }
       else if (_titleQuery == '' && _instructorQuery != '') {     // search by instructor
         _results = _courseCatalog.where((course) => course['instructor']['fullName'].toLowerCase().contains(_instructorQuery.toLowerCase())).toList();        
@@ -109,6 +111,7 @@ class CourseSearchState extends State<CourseSearch> {
           Container(              
             margin: const EdgeInsets.fromLTRB(0, 25.0, 0, 0),   
             padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 5.0),
+            color: Colors.grey[400],
             alignment: Alignment.center,            
             child: Column(
               children: [
@@ -117,6 +120,8 @@ class CourseSearchState extends State<CourseSearch> {
                   child: TextField(
                     onChanged: handleTitleQuery,
                     decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(),
                       hintText: 'Course title (ex: 161, CS162)',
                     ),                  
@@ -127,18 +132,19 @@ class CourseSearchState extends State<CourseSearch> {
                   child: TextField(
                     onChanged: handleInstructorQuery,
                     decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(),
                       hintText: 'Instructor',
                     ),                  
                   ),
-                ),
+                ),                
                 Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                   child: searchButton.getButton(),
                 ),
               ],
             )
-            
           ),
           Container(
             child: SearchResults(_results),

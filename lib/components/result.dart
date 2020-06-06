@@ -15,19 +15,17 @@ class Result extends StatelessWidget {
     return InkWell(
       onTap: _goToCourse,
       child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.deepOrange, Colors.orange]
-          ),
+        padding: const EdgeInsets.all(10),        
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 2.0, color: Colors.orangeAccent),
+          ),                  
         ),
         child: ResultTextBuilder(
           title: course['title'],
           section: course['section'],
           instructor: course['instructor']['fullName'],
-          fontSize: 20
+          fontSize: 20,          
         ).buildResultText(),
       ),
     );
