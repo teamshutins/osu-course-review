@@ -26,6 +26,8 @@ class CourseSearchState extends State<CourseSearch> {
   List<dynamic> _courseCatalog = [];
   List<dynamic> _results = [];
 
+  
+
   void loadCourses() async {
     List<dynamic> courseData =
         jsonDecode(await rootBundle.loadString('assets/course_info.json'));
