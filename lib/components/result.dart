@@ -15,11 +15,17 @@ class Result extends StatelessWidget {
       onTap: _goToCourse,
       child: Container(
         padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
+        margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.amber,
+            width: 1,
+          ),
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.deepOrange, Colors.orange]),
+              colors: [Colors.white, Color(0xFFD3D3D3)]),
         ),
         child: ResultTextBuilder(
                 title: course['title'],

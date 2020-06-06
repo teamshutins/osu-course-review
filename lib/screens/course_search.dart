@@ -121,6 +121,7 @@ class CourseSearchState extends State<CourseSearch> {
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.orange,
               centerTitle: true,
               title: Text('OSU Course Review',
                   style: TextStyle(color: Colors.white, fontSize: 32)),
