@@ -7,9 +7,6 @@ import './result.dart';
 import '../screens/course_description.dart';
 import '../models/id_section.dart';
 import 'result.dart';
-import 'result.dart';
-import 'result.dart';
-
 
 class SearchResults extends StatefulWidget {
   final List<dynamic> results;
