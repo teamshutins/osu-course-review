@@ -31,7 +31,8 @@ class _SearchResultsState extends State<SearchResults> {
                     courseName: widget.results[index]["name"],
                     courseDescription: widget.results[index]["description"],
                     results: widget.results);
-
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    currentFocus.requestFocus(FocusNode());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
