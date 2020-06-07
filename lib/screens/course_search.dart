@@ -2,9 +2,6 @@
 
 // import official
 import 'package:flutter/material.dart';
-import 'dart:async' show Future;
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import custom
@@ -32,7 +29,7 @@ class CourseSearchState extends State<CourseSearch> {
     List<dynamic> courseDataBySection = [];   
 
     QuerySnapshot querySnapshot = await _firestore.collection('catalog').getDocuments();
-    querySnapshot.documents.forEach((f) => courseDataBySection.add(f.data));      
+    querySnapshot.documents.forEach((courseDoc) => courseDataBySection.add(courseDoc.data));      
 
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog
     setState(() {
@@ -80,7 +77,7 @@ class CourseSearchState extends State<CourseSearch> {
               .contains(_instructorQuery.toLowerCase());
           bool titleMatch =
               course['title'].toLowerCase().contains(_titleQuery.toLowerCase());
-          return instructorMatch && titleMatch;
+          return instructorMatch || titleMatch;
         }).toList();
       } else if (_titleQuery != '' && _instructorQuery == '') {
         // search by title
@@ -177,10 +174,11 @@ class CourseSearchState extends State<CourseSearch> {
   }
 
   void searchMethod(BuildContext context) {
+    handleSearch();
+
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
-    }
-    handleSearch();
+    }    
   }
 }
