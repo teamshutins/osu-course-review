@@ -28,7 +28,7 @@ class CourseSearchState extends State<CourseSearch> {
   void loadCourses() async {   
     List<dynamic> courseDataBySection = [];   
 
-    QuerySnapshot querySnapshot = await _firestore.collection('catalog').getDocuments();
+    QuerySnapshot querySnapshot = await _firestore.collection('catalog').orderBy('id', descending: false).getDocuments();
     querySnapshot.documents.forEach((f) => courseDataBySection.add(f.data));      
 
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog
