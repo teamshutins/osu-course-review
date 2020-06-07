@@ -10,8 +10,9 @@ import 'result.dart';
 
 class SearchResults extends StatefulWidget {
   final List<dynamic> results;
+  final bool isInit;
 
-  SearchResults(this.results);
+  SearchResults(this.results, this.isInit);
 
   @override
   State<StatefulWidget> createState() => new _SearchResultsState();
@@ -21,11 +22,12 @@ class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
     int num = widget.results.length; 
+    
     return Row(
           children: <Widget>[
             Conditional.single(
               context: context,
-              conditionBuilder: (BuildContext context) => num == 0,
+              conditionBuilder: (BuildContext context) =>(num == 0 && widget.isInit == false),
               widgetBuilder: (BuildContext context){
                 return NullResult();
               },
