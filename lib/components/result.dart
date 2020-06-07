@@ -22,16 +22,17 @@ class Result extends StatelessWidget {
             width: 1,
           ),
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.white, Color(0xFFD3D3D3)]),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.white, Color(0xFFD3D3D3)]
+          ),
         ),
         child: ResultTextBuilder(
-                title: course['title'],
-                section: course['section'],
-                instructor: course['instructor']['fullName'],
-                fontSize: 20)
-            .buildResultText(),
+          title: course['title'],
+          section: course['section'],
+          instructor: course['instructor']['fullName'],
+          fontSize: 20)
+      .buildResultText(),
       ),
     );
   }
@@ -45,7 +46,7 @@ class NullResult extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         margin:const EdgeInsets.fromLTRB(5, 0, 5, 0),
         child: Text("Search not found, please try again",
-        style: TextStyle(color: Colors.red, fontSize: 15)),
+        style: TextStyle(color: Colors.red, fontSize: 20)),
       )
     );
   }
