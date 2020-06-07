@@ -115,63 +115,65 @@ class CourseSearchState extends State<CourseSearch> {
               title: Text('OSU Course Review',
                   style: TextStyle(color: Colors.white, fontSize: 32)),
             ),
-            body: Column(children: [
-              Container(
-                  margin: const EdgeInsets.fromLTRB(0, 25.0, 0, 0),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 50.0, vertical: 5.0),
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15.0),
-                        child: TextField(
-                          onChanged: handleTitleQuery,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Course title (ex: 161, CS162)',
+            body: SingleChildScrollView(
+                          child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.fromLTRB(0, 25.0, 0, 0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50.0, vertical: 5.0),
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          child: TextField(
+                            onChanged: handleTitleQuery,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Course title (ex: 161, CS162)',
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15.0),
-                        child: TextField(
-                          onChanged: handleInstructorQuery,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Instructor',
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          child: TextField(
+                            onChanged: handleInstructorQuery,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Instructor',
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: searchButton.getButton(),
-                      ),
-                    ],
-                  )),
-              Row(children: <Widget>[
-                Expanded(
-                  child: new Container(
-                      margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                      child: Divider(
-                        color: Colors.black,
-                        height: 36,
-                      )),
-                ),
-                Text("Search Results"),
-                Expanded(
-                  child: new Container(
-                      margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                      child: Divider(
-                        color: Colors.black,
-                        height: 36,
-                      )),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: searchButton.getButton(),
+                        ),
+                      ],
+                    )),
+                Row(children: <Widget>[
+                  Expanded(
+                    child: new Container(
+                        margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                        child: Divider(
+                          color: Colors.black,
+                          height: 36,
+                        )),
+                  ),
+                  Text("Search Results"),
+                  Expanded(
+                    child: new Container(
+                        margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                        child: Divider(
+                          color: Colors.black,
+                          height: 36,
+                        )),
+                  ),
+                ]),
+                Container(
+                  child: SearchResults(_results),
                 ),
               ]),
-              Container(
-                child: SearchResults(_results),
-              ),
-            ])));
+            )));
   }
 
   void searchMethod(BuildContext context) {

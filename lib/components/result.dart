@@ -36,3 +36,17 @@ class Result extends StatelessWidget {
     );
   }
 }
+
+class NullResult extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        margin:const EdgeInsets.fromLTRB(5, 0, 5, 0),
+        child: Text("Search not found, please try again",
+        style: TextStyle(color: Colors.red, fontSize: 15)),
+      )
+    );
+  }
+}
