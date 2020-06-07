@@ -24,40 +24,48 @@ class _SearchResultsState extends State<SearchResults> {
     int num = widget.results.length; 
     
     return Row(
-          children: <Widget>[
-            Conditional.single(
-              context: context,
-              conditionBuilder: (BuildContext context) =>(num == 0 && widget.isInit == false),
-              widgetBuilder: (BuildContext context){
-                return NullResult();
-              },
-              fallbackBuilder: (BuildContext context){
-                return Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: widget.results.length,
-                      itemBuilder: (BuildContext context, int index){
-                        return Result(widget.results[index], () {
-                          final IdAndSection idAndSecNum = IdAndSection(
-                            courseId: widget.results[index]["id"],
-                            courseTitle: widget.results[index]["title"],
-                            courseInstructor: widget.results[index]["instructor"],
-                            sectionNumber: widget.results[index]["section"],
-                            courseName: widget.results[index]["name"],
-                            courseDescription: widget.results[index]["description"],
-                            results: widget.results);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => 
-                                CourseDescriptionScreen(idAndSection: idAndSecNum)),
-                             );
-                        });
-                      }));    
-              },
-            )
-          ],
+      children: <Widget>[
+        Conditional.single(
+          context: context,
+          conditionBuilder: (BuildContext context) =>(num == 0 && widget.isInit == false),
+          widgetBuilder: (BuildContext context){
+            return NullResult();
+          },
+          fallbackBuilder: (BuildContext context){
+            return Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: widget.results.length,
+                itemBuilder: (BuildContext context, int index){
+                  return Result(widget.results[index], () {
+                    final IdAndSection idAndSecNum = IdAndSection(
+                      courseId: widget.results[index]["id"],
+                      courseTitle: widget.results[index]["title"],
+                      courseInstructor: widget.results[index]["instructor"],
+                      sectionNumber: widget.results[index]["section"],
+                      courseName: widget.results[index]["name"],
+                      courseDescription: widget.results[index]["description"],
+                      results: widget.results
+                    );
+                    
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    currentFocus.requestFocus(FocusNode());
+                    
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => 
+                          CourseDescriptionScreen(idAndSection: idAndSecNum)
+                      ),
+                    );
+                  });
+                }
+              )
+            );    
+          },
+        )
+      ],
     );
-        
   }
 }
