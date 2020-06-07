@@ -29,7 +29,7 @@ class CourseSearchState extends State<CourseSearch> {
     List<dynamic> courseDataBySection = [];   
 
     QuerySnapshot querySnapshot = await _firestore.collection('catalog').getDocuments();
-    querySnapshot.documents.forEach((f) => courseDataBySection.add(f.data));      
+    querySnapshot.documents.forEach((courseDoc) => courseDataBySection.add(courseDoc.data));      
 
     // assign _courseCatalog again inside setState so Flutter knows to redraw widgets that use _courseCatalog
     setState(() {
@@ -172,10 +172,11 @@ class CourseSearchState extends State<CourseSearch> {
   }
 
   void searchMethod(BuildContext context) {
+    handleSearch();
+
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
-    }
-    handleSearch();
+    }    
   }
 }
